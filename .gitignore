@@ -90,3 +90,6 @@ fastlane/test_output
 iOSInjectionProject/
 
 .DS_Store
+
+# Ignore all generated zip files for lambda functions
+src/lambda/*/*.zip
