@@ -35,6 +35,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Update only on changes in src/lambda/test
+        run: |
+          if [ -n "$(git diff --name-only ${{ github.sha }}..$GITHUB_SHA | grep '^src/lambda/test')" ]; then
+            echo "Changes detected in src/lambda/test. Proceeding with the workflow."
+          else
+            echo "No changes in src/lambda/test. Skipping the workflow."
+            exit 78  # Exit with a neutral status code to indicate skipping
+          fi
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
