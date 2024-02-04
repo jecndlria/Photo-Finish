@@ -39,7 +39,7 @@ jobs:
         id: check-changes-test1
         run: |
           current_commit_sha=${{ github.sha }}
-          parent_commit_sha=$(git rev-parse $current_commit_sha^)
+          parent_commit_sha=$(git rev-parse "${current_commit_sha}^")
           git diff --exit-code $parent_commit_sha $current_commit_sha -- src/lambda/test
           retval=$?
           if [ $retval == 1 ]; then
