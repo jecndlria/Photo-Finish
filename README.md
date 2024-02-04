@@ -11,6 +11,7 @@ Stuff you need (ask Josh):
 1. AWS Application Tag (for creating AWS resources/functions and linking to application)
 2. IAM login and password (logging into console)
 3. IAM public and secret access key (use AWS Swift APK)
+4. AWS_REGION is `us-west-1`
 
 ## Using Swift SDK
 
