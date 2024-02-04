@@ -38,12 +38,12 @@ jobs:
     needs: [checkout, configure_aws]
     steps:
       - name: Create "test" zip file 
-        working-directory: ./src/lambda
+        working-directory: src/lambda
         run: |
           cd test
           zip -r test.zip .
       - name: Update "test" function
-        working-directory: ./src/lambda
+        working-directory: src/lambda
         run: |
           aws lambda update-function-code \
           --function-name test \
