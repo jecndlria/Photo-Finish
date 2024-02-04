@@ -36,7 +36,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Update only on changes in src/lambda/test
-        id: check-changes
+        id: check-changes-test1
         run: |
           if [ -n "$(git diff --name-only ${{ github.sha }}..$GITHUB_SHA | grep '^src/lambda/test')" ]; then
             echo "Changes detected in src/lambda/test. Proceeding with the workflow."
@@ -46,19 +46,19 @@ jobs:
           fi
         continue-on-error: true
       - name: Configure AWS Credentials
-        if: success() && steps.check-changes.outcome == 'success'
+        if: success() && steps.check-changes-test1.outcome == 'success'
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
       - name: Create test zip file 
-        if: success() && steps.check-changes.outcome == 'success'
+        if: success() && steps.check-changes-test1.outcome == 'success'
         run: |
           cd src/lambda/test
           zip -r test.zip .
       - name: Update test function
-        if: success() && steps.check-changes.outcome == 'success'
+        if: success() && steps.check-changes-test1.outcome == 'success'
         run: |
           aws lambda update-function-code \
           --function-name test \
