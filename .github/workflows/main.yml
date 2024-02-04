@@ -15,7 +15,7 @@ jobs:
           pwd
           ls -la
 
-  configure:
+  configure_dep:
     runs-on: ubuntu-latest
     needs: checkout
     steps:
@@ -31,7 +31,7 @@ jobs:
 
   update_lambda_test:
     runs-on: ubuntu-latest
-    needs: [checkout, configure_aws]
+    needs: [checkout, configure_dep]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
