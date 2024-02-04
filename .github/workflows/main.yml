@@ -38,7 +38,7 @@ jobs:
       - name: Update only on changes in src/lambda/test
         id: check-changes-test1
         run: |
-          if [ -n "$(git diff --name-only ${{ github.sha }}..$GITHUB_SHA | grep '^src/lambda/test')" ]; then
+          if git diff --exit-code src/lambda/test; then
             echo "Changes detected in src/lambda/test. Proceeding with the workflow."
           else
             echo "No changes in src/lambda/test. Skipping the workflow."
