@@ -41,6 +41,7 @@ jobs:
         run: |
           pwd
           ls -la
+          cd ..
       - name: Create test zip file 
         run: |
           cd src/lambda/test
