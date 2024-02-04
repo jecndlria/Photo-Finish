@@ -1,8 +1,24 @@
 # Photo Finish
 
+## Docs for Development
+
 Drive Link: https://drive.google.com/drive/u/3/folders/1qi1kIUQad6aGMQsWT2ZEQTJ-bCvBfybs
 
 Trello Link: https://trello.com/b/5hir3deU/photo-finish
+
+Stuff you need (ask Josh):
+
+1. AWS Application Tag (for creating AWS resources/functions and linking to application)
+2. IAM login and password (logging into console)
+3. IAM public and secret access key (use AWS Swift APK)
+
+## Using Swift SDK
+
+1. Create environment variables `AWS_REGION`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY`
+![image](https://github.com/jecndlria/Photo-Finish/assets/73074625/1b1f19d2-e34a-403c-adb7-3b4a2c4197d5)
+
+2. 
+
 
 ## Creating new Lambda function
 
@@ -40,7 +56,7 @@ Ensure that the tag is properly added to the function (ask Josh for the value)
 
 ...substituting `test1` for the actual name of the Lambda function you create.
 
-3. Create the corresponding directory in `src/lambda/` for your new Lambda function
+3. Create the corresponding directory in `src/lambda/` for your new Lambda function. Pushing your commit will update the code on AWS automatically, thanks to the GitHub action.
 
 ```
 cd src/lambda
