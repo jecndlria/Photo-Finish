@@ -38,8 +38,11 @@ jobs:
     needs: [checkout, configure_aws]
     defaults:
       run:
-        working-directory: src/lambda
+        working-directory: ./src/lambda
     steps:
+      - name: Check working-directory
+        run: |
+          ls -la
       - name: Create test zip file 
         run: |
           cd test
