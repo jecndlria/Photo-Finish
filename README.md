@@ -31,7 +31,7 @@ Ensure that the tag is properly added to the function (ask Josh for the value)
         run: |
           cd src/lambda/test1 # Change this line
           zip -r test1.zip . # Change this line
-      - name: Update test1 function
+      - name: Update test1 function # Change this line
         run: |
           aws lambda update-function-code \
           --function-name test1 \ # Change this line
