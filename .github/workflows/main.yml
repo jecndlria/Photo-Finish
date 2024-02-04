@@ -29,33 +29,24 @@ jobs:
           pwd
           ls -la
 
-  configure_aws:
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
-      - run: |
-          pwd
-          ls -la
-
   update_lambda_test:
     runs-on: ubuntu-latest
     needs: [checkout, configure_aws]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
       - name: Create test zip file 
         run: |
           cd src/lambda/test
           zip -r test.zip .
       - name: Update test function
         run: |
-          export AWS_REGION="us-west-1"
           aws lambda update-function-code \
           --function-name test \
           --zip-file fileb://src/lambda/test/test.zip
