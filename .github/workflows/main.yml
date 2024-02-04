@@ -36,6 +36,9 @@ jobs:
   update_lambda_test:
     runs-on: ubuntu-latest
     needs: [checkout, configure_aws]
+    defaults:
+      run:
+        working-directory: src/lambda
     steps:
       - name: Check working-directory
         run: |
