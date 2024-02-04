@@ -38,7 +38,9 @@ jobs:
       - name: Update only on changes in src/lambda/test
         id: check-changes-test1
         run: |
-          git diff --exit-code HEAD^ HEAD -- src/lambda/test
+          current_commit_sha=${{ github.sha }}
+          parent_commit_sha=$(git rev-parse $current_commit_sha^)
+          git diff --exit-code $parent_commit_sha $current_commit_sha -- src/lambda/test
           retval=$?
           if [ $retval == 1 ]; then
             echo "Changes detected in src/lambda/test. Proceeding with the workflow."
