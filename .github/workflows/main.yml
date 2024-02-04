@@ -44,6 +44,7 @@ jobs:
             echo "No changes in src/lambda/test. Skipping the workflow."
             exit 1
           fi
+        continue-on-error: true
       - name: Configure AWS Credentials
         if: success() && steps.check-changes.outcome == 'success'
         uses: aws-actions/configure-aws-credentials@v4
