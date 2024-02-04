@@ -63,6 +63,6 @@ jobs:
           --function-name test \
           --zip-file fileb://src/lambda/test/test.zip
       - name: Clean up check-changes fail
-        if: steps.check-changes.outcome != 'success'
+        if: failure() && steps.check-changes.outcome != 'success'
         run: |
           echo "Cleaning up failure in src/lambda/test job"
