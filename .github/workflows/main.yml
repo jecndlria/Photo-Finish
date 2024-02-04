@@ -42,7 +42,7 @@ jobs:
             echo "Changes detected in src/lambda/test. Proceeding with the workflow."
           else
             echo "No changes in src/lambda/test. Skipping the workflow."
-            exit 1
+            exit 78
           fi
         continue-on-error: true
       - name: Configure AWS Credentials
