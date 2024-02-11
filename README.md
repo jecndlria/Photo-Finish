@@ -29,6 +29,10 @@ Stuff you need (ask Josh):
 
 Ensure that the tag is properly added to the function (ask Josh for the value)
 
+![image](https://github.com/jecndlria/Photo-Finish/assets/73074625/43ea91a8-c44f-410d-993b-c3d92ac5558c)
+
+In the Runtime Settings tab, change the handler to `(function_name).lambda_handler`.
+
 2. Add a new Github action job to `./github/workflows/main.yml`
 
 ```yml
@@ -63,4 +67,13 @@ Ensure that the tag is properly added to the function (ask Josh for the value)
 cd src/lambda
 mkdir test1
 touch test1.py
+```
+
+Make sure the lambda function has the same name as the file!
+```py
+def test1(event, context):
+  return {
+    "status": 200,
+    "body": "Hello!",
+  }
 ```
