@@ -9,7 +9,7 @@ def lambda_handler(event, context):
 
     try:
         response = s3.get_object(Bucket=bucket_name, Key=object_key)
-        object_content = response['Body'].read()
+        image_content = response['Body'].read()
 
         # Processing can be done here
 
