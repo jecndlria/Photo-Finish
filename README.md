@@ -69,9 +69,9 @@ mkdir test1
 touch test1.py
 ```
 
-Make sure the lambda function has the same name as the file!
+Make sure the lambda function has this name, otherwise it will not run! We will identify lambda functions by file name.
 ```py
-def test1(event, context):
+def lambda_handler(event, context):
   return {
     "status": 200,
     "body": "Hello!",
