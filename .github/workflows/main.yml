@@ -50,3 +50,26 @@ jobs:
           aws lambda update-function-code \
           --function-name test \
           --zip-file fileb://src/lambda/test/test.zip
+
+
+  update_lambda_getS3Object:
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create getS3Object zip file 
+        run: |
+          cd src/lambda/getS3Object
+          zip -r getS3Object.zip .
+      - name: Update getS3Object function
+        run: |
+          aws lambda update-function-code \
+          --function-name getS3Object \
+          --zip-file fileb://src/lambda/getS3Object/getS3Object.zip
