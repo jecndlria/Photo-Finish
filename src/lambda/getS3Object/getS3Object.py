@@ -1,7 +1,7 @@
 import json
 import boto3
 
-def getS3Object(event, context):
+def lambda_handler(event, context):
     s3 = boto3.client('s3')
 
     bucket_name = 'photo-finish-bucket'
