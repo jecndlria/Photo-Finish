@@ -1,3 +1,6 @@
-def lambda_handler(event, context):
+def test(event, context):
     print(event)
-    return "Hello from Lambda! This is a test function! Yippee!"
+    return {
+        "status": 200
+        "body": "Hello!",
+    }
