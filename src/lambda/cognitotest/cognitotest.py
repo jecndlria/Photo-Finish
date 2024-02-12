@@ -1,7 +1,7 @@
 import json
 import boto3
 
-user_pool_id = "hard coded value, don't do this"
+user_pool_id = "hard coded value for testing, check aws for value : )"
 
 def lambda_handler(event, context):
     """
@@ -14,13 +14,13 @@ def lambda_handler(event, context):
     try:
         response = cognito_client.admin_get_user(UserPoolId=user_pool_id, Username="testuser")
         user_attributes = response['UserAttributes']
-        for attribute in user_attributes:
-            if attribute['Name'] == 'username'
-                return {
-                    'statusCode': 200
-                    'body': json.dumps({
-                            'username': attribute['Value']
-                        })
+        #for attribute in user_attributes:
+        #    if attribute['Name'] == 'email':
+        return {
+            'statusCode': 200,
+            'body': json.dumps({
+                    'username': response['Username']
+                    })
                 }
         return {
             'statusCode': 404,
