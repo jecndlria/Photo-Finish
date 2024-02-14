@@ -108,12 +108,12 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
-      - name: Create create_account zip file
+      - name: Create create_account zip file 
         run: |
-          cd src/lambda/create_account 
+          cd src/lambda/create_account
           zip -r create_account.zip .
-      - name: Update create_account function 
+      - name: Update cognitotest function
         run: |
           aws lambda update-function-code \
-          --function-name create_account \ 
-          --zip-file fileb://src/lambda/create_account/create_account.zip 
+          --function-name create_account \
+          --zip-file fileb://src/lambda/create_account/create_account.zip
