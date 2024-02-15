@@ -132,7 +132,7 @@ jobs:
           aws-region: us-west-1
       - name: Create rekognition_image_analysis zip file
         run: |
-          cd src/lambda/rekognition_image_analysis 
+          cd src/lambda/rekognition_image_analysis
           zip -r rekognition_image_analysis.zip . 
       - name: Update rekognition_image_analysis function
         run: |
