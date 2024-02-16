@@ -160,4 +160,4 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name generate_prompt \ 
-          --zip-file fileb://src/lambda/generate_prompt/generate_prompt.zip 
+          --zip-file fileb://src/lambda/generate_prompt/generate_prompt.zip
