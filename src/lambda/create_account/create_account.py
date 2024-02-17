@@ -2,33 +2,50 @@ import json
 import boto3
 import pymysql
 import sys
+import password # password file with all aws credentials 
 
 REGION = 'us-west-1'
-rds_host = ""
-name = "pf_admin"
-password = ""
-db_name = "pf_database"
+rds_host = password.rds_host
+name = password.pf_admin
+password = password.db_password
+db_name = password.db_name
+userpool_id = ""
 
-
-def lambda_handler(event, context):
+def lambda_handler(event, context): # im assuming here that the new user's information will be passed in event
     client = boto3.client('cognito-idp')
-    user = event['request']['userAttributes']
-    user_display_name = user["name"]
-    user_handle = user["preferred_username"]
-    user_email = user["email"]
-    user_cognito_id = user["sub"]
+    try:
+        response = client.admin_create_user(
+            UserPoolId=userpool_id, 
+            Username=event['username'],
+            UserAttributes=[
+                {
+                    "Name": "name",
+                    "Value": event['name']
+                },
+                {
+                    "Name": "email",
+                    "Value": event['email']
+                }
+            ],
+            TemporaryPassword=event['password']
+            )
+    except Exception as e:
+        print(e)
+
+    user = response['User']['Attributes']
+    user_display_name = response["Username"]
+    user_email = next((attr["Value"] for attr in user if attr["Name"] == "email"), None)
+    user_cognito_id = next((attr["Value"] for attr in user if attr["Name"] == "sub"), None) # generated cognito id
     try:
         conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
         cur = conn.cursor()
         sql = f"""
-        INSERT INTO users (
-            display_name,
-            handle,
+        INSERT INTO user_accounts (
+            username,
             email,
-            cognito_user_id
+            cognito_userid
         ) VALUES(
             '{user_display_name}',
-            '{user_handle}',
             '{user_email}',
             '{user_cognito_id}'
         )

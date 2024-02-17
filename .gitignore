@@ -93,3 +93,6 @@ iOSInjectionProject/
 
 # Ignore all generated zip files for lambda functions
 src/lambda/*/*.zip
+
+# Passwords
+Photo-Finish\src\lambda\create_account\password.py
