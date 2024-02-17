@@ -4,7 +4,7 @@ import pymysql
 import sys
 import password # password file with all aws credentials 
 
-REGION = 'us-west-1'
+REGION = 'us-west-1b'
 rds_host = password.rds_host
 name = password.pf_admin
 password = password.db_password

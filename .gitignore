@@ -95,4 +95,4 @@ iOSInjectionProject/
 src/lambda/*/*.zip
 
 # Passwords
-Photo-Finish\src\lambda\create_account\password.py
+src/lambda/create_account/password.py
