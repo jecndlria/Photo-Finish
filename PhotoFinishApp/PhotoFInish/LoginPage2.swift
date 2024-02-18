@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct LoginPage2: View {
     var body: some View{
         VStack{
             ZStack{
@@ -77,6 +77,6 @@ struct ContentView_Previews:
     PreviewProvider{
     static var previews: some
         View{
-            ContentView()
+            LoginPage2()
         }
 }

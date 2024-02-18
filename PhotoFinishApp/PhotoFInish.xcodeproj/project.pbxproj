@@ -7,20 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2107DE882B81CCA6004F1991 /* successfulLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107DE872B81CCA6004F1991 /* successfulLogin.swift */; };
 		21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */; };
-		21A713B72B6C234A00DAF6AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A713B62B6C234A00DAF6AE /* ContentView.swift */; };
+		21A713B72B6C234A00DAF6AE /* LoginPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A713B62B6C234A00DAF6AE /* LoginPage2.swift */; };
 		21A713BB2B6C234E00DAF6AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A713BA2B6C234E00DAF6AE /* Assets.xcassets */; };
 		21A713BE2B6C234E00DAF6AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A713BD2B6C234E00DAF6AE /* Preview Assets.xcassets */; };
-		21B5D3D82B6E29A300F2F9F3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B5D3D72B6E29A300F2F9F3 /* File.swift */; };
+		21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */; };
+		21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D515E92B75C0D800E2D8FE /* EmailLogin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2107DE872B81CCA6004F1991 /* successfulLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = successfulLogin.swift; sourceTree = "<group>"; };
 		21A713B12B6C234A00DAF6AE /* PhotoFInish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFInish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFInishApp.swift; sourceTree = "<group>"; };
-		21A713B62B6C234A00DAF6AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		21A713B62B6C234A00DAF6AE /* LoginPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage2.swift; sourceTree = "<group>"; };
 		21A713BA2B6C234E00DAF6AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21A713BD2B6C234E00DAF6AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		21B5D3D72B6E29A300F2F9F3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltLoginPage.swift; sourceTree = "<group>"; };
+		21D515E92B75C0D800E2D8FE /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +57,11 @@
 		21A713B32B6C234A00DAF6AE /* PhotoFInish */ = {
 			isa = PBXGroup;
 			children = (
+				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
 				21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */,
-				21A713B62B6C234A00DAF6AE /* ContentView.swift */,
-				21B5D3D72B6E29A300F2F9F3 /* File.swift */,
+				21A713B62B6C234A00DAF6AE /* LoginPage2.swift */,
+				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
+				2107DE872B81CCA6004F1991 /* successfulLogin.swift */,
 				21A713BA2B6C234E00DAF6AE /* Assets.xcassets */,
 				21A713BC2B6C234E00DAF6AE /* Preview Content */,
 			);
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21A713B72B6C234A00DAF6AE /* ContentView.swift in Sources */,
-				21B5D3D82B6E29A300F2F9F3 /* File.swift in Sources */,
+				21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */,
+				21A713B72B6C234A00DAF6AE /* LoginPage2.swift in Sources */,
+				2107DE882B81CCA6004F1991 /* successfulLogin.swift in Sources */,
+				21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */,
 				21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
