@@ -12,7 +12,7 @@ import SwiftData
 struct LoginScreenApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EmailLogin()
         }
     }
 }
