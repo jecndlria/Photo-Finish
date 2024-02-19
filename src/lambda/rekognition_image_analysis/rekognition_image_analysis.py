@@ -39,3 +39,5 @@ def lambda_handler(event, context): #event parameter should be triggered by s3
         print(f"ValueError: {ve}")
     except Exception as e: #handle other exceptions as needed
         print(f"An unexpected error occurred: {e}")
+    
+    #TODO: send an sns alert when the object in the prompt is detected in the s3 image

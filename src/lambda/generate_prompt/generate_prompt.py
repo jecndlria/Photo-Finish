@@ -28,5 +28,6 @@ def send_prompt_to_user(user_id):
 
     prompt = f"Photo object of the day: {obj_of_the_day}"
     print(f"Sending prompt to user {user_id}: {prompt}")
+    #how to push notifs on app?? 
 
 
