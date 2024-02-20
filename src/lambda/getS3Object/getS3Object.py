@@ -6,7 +6,7 @@ def lambda_handler(event, context):
     s3 = boto3.client('s3')
 
     bucket_name = 'photo-finish-bucket'
-    object_key = 'test.png'
+    object_key = event['object_key']
 
     try:
         response = s3.get_object(Bucket=bucket_name, Key=object_key)
