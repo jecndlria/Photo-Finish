@@ -60,7 +60,7 @@ struct EmailLogin: View {
             .navigationDestination(isPresented: $showingLoginScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
-                AltLoginPage()
+                LoginPage2()
                     .navigationBarHidden(true)
             }
         }

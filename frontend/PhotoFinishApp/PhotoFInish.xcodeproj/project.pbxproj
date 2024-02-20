@@ -14,6 +14,7 @@
 		21A713BE2B6C234E00DAF6AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A713BD2B6C234E00DAF6AE /* Preview Assets.xcassets */; };
 		21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */; };
 		21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D515E92B75C0D800E2D8FE /* EmailLogin.swift */; };
+		B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13B1E2C2B8440BA00E15A61 /* CameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		21A713BD2B6C234E00DAF6AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltLoginPage.swift; sourceTree = "<group>"; };
 		21D515E92B75C0D800E2D8FE /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
+		B13B1E2C2B8440BA00E15A61 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
 				21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */,
 				21A713B62B6C234A00DAF6AE /* LoginPage2.swift */,
+				B13B1E2C2B8440BA00E15A61 /* CameraView.swift */,
 				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
 				2107DE872B81CCA6004F1991 /* successfulLogin.swift */,
 				21A713BA2B6C234E00DAF6AE /* Assets.xcassets */,
@@ -149,6 +152,7 @@
 				21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */,
 				21A713B72B6C234A00DAF6AE /* LoginPage2.swift in Sources */,
 				2107DE882B81CCA6004F1991 /* successfulLogin.swift in Sources */,
+				B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */,
 				21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */,
 				21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */,
 			);
@@ -284,9 +288,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoFInish/Preview Content\"";
-				DEVELOPMENT_TEAM = X3ST3CZXBS;
+				DEVELOPMENT_TEAM = 4Y3Y7FP3CM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow to take photo";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow to record Audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -313,9 +319,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoFInish/Preview Content\"";
-				DEVELOPMENT_TEAM = X3ST3CZXBS;
+				DEVELOPMENT_TEAM = 4Y3Y7FP3CM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow to take photo";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow to record Audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
