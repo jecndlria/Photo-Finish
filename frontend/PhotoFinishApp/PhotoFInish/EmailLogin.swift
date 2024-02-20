@@ -42,7 +42,7 @@ struct EmailLogin: View {
                         .border(.red, width:CGFloat(wrongPassword))
                         .autocorrectionDisabled(true)
                         .autocapitalization(.none)
-                    Button("💦Start Finishing💦"){
+                    Button("Login"){
                         autheticateUser(username: username, password: password)
                     }
                         .frame(width:200, height:40)
