@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import AWSCore
 
 @main
 struct LoginScreenApp: App {
