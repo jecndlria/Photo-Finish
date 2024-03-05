@@ -1,7 +1,6 @@
 import SwiftUI
 import SwiftData
 
-
 struct EmailLogin: View {
     @State private var username = ""
     @State private var password = ""
@@ -67,9 +66,19 @@ struct EmailLogin: View {
     }
     
     func autheticateUser(username: String, password: String){
+        print("Hi")
         if username == "test1"{
             wrongUsername = 0;
             if password == "test1"{
+                AuthenticationManager.sharedAuth.createAccount(username: "test", password: "test1", email: "jecande02@gmail.com") { error in
+                    if let error = error {
+                        // Handle error
+                        print("Error creating account: \(error.localizedDescription)")
+                    } else {
+                        // Account created successfully
+                        print("Account created successfully")
+                    }
+                }
                 wrongPassword = 0
                 showingLoginScreen = true
             } else {wrongPassword = 2}
