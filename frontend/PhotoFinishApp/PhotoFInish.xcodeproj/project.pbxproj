@@ -54,7 +54,7 @@
 		03711FAD2B95B8B300E516BA /* AWSTranscribeStreaming in Frameworks */ = {isa = PBXBuildFile; productRef = 03711FAC2B95B8B300E516BA /* AWSTranscribeStreaming */; };
 		03711FAF2B95B8B300E516BA /* AWSTranslate in Frameworks */ = {isa = PBXBuildFile; productRef = 03711FAE2B95B8B300E516BA /* AWSTranslate */; };
 		03711FB12B95B8B300E516BA /* AWSUserPoolsSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 03711FB02B95B8B300E516BA /* AWSUserPoolsSignIn */; };
-		03711FB32B95BDB200E516BA /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03711FB22B95BDB200E516BA /* AuthenticationManager.swift */; };
+		03F6EAF32B9837BD00189D09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6EAF22B9837BD00189D09 /* AppDelegate.swift */; };
 		2107DE882B81CCA6004F1991 /* successfulLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107DE872B81CCA6004F1991 /* successfulLogin.swift */; };
 		21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */; };
 		21A713B72B6C234A00DAF6AE /* LoginPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A713B62B6C234A00DAF6AE /* LoginPage2.swift */; };
@@ -66,7 +66,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03711FB22B95BDB200E516BA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		03F6EAF22B9837BD00189D09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2107DE872B81CCA6004F1991 /* successfulLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = successfulLogin.swift; sourceTree = "<group>"; };
 		21A713B12B6C234A00DAF6AE /* PhotoFInish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFInish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFInishApp.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				B13B1E2C2B8440BA00E15A61 /* CameraView.swift */,
 				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
 				2107DE872B81CCA6004F1991 /* successfulLogin.swift */,
-				03711FB22B95BDB200E516BA /* AuthenticationManager.swift */,
+				03F6EAF22B9837BD00189D09 /* AppDelegate.swift */,
 				21A713BA2B6C234E00DAF6AE /* Assets.xcassets */,
 				21A713BC2B6C234E00DAF6AE /* Preview Content */,
 			);
@@ -190,6 +190,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				03F6EAFD2B983AEA00189D09 /* PBXTargetDependency */,
+				03F6EAF72B983ADE00189D09 /* PBXTargetDependency */,
+				03F6EAF92B983ADE00189D09 /* PBXTargetDependency */,
+				03F6EAFB2B983ADE00189D09 /* PBXTargetDependency */,
+				03F6EAF52B983AD000189D09 /* PBXTargetDependency */,
 			);
 			name = PhotoFInish;
 			packageProductDependencies = (
@@ -300,15 +305,38 @@
 			files = (
 				21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */,
 				21A713B72B6C234A00DAF6AE /* LoginPage2.swift in Sources */,
-				03711FB32B95BDB200E516BA /* AuthenticationManager.swift in Sources */,
 				2107DE882B81CCA6004F1991 /* successfulLogin.swift in Sources */,
 				B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */,
+				03F6EAF32B9837BD00189D09 /* AppDelegate.swift in Sources */,
 				21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */,
 				21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03F6EAF52B983AD000189D09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 03F6EAF42B983AD000189D09 /* AWSCore */;
+		};
+		03F6EAF72B983ADE00189D09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 03F6EAF62B983ADE00189D09 /* AWSCognitoAuth */;
+		};
+		03F6EAF92B983ADE00189D09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 03F6EAF82B983ADE00189D09 /* AWSCognitoIdentityProvider */;
+		};
+		03F6EAFB2B983ADE00189D09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 03F6EAFA2B983ADE00189D09 /* AWSCognitoIdentityProviderASF */;
+		};
+		03F6EAFD2B983AEA00189D09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 03F6EAFC2B983AEA00189D09 /* AWSLambda */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		21A713BF2B6C234E00DAF6AE /* Debug */ = {
@@ -761,6 +789,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03711F532B95B8B300E516BA /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
 			productName = AWSUserPoolsSignIn;
+		};
+		03F6EAF42B983AD000189D09 /* AWSCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03711F532B95B8B300E516BA /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCore;
+		};
+		03F6EAF62B983ADE00189D09 /* AWSCognitoAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03711F532B95B8B300E516BA /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCognitoAuth;
+		};
+		03F6EAF82B983ADE00189D09 /* AWSCognitoIdentityProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03711F532B95B8B300E516BA /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCognitoIdentityProvider;
+		};
+		03F6EAFA2B983ADE00189D09 /* AWSCognitoIdentityProviderASF */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03711F532B95B8B300E516BA /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCognitoIdentityProviderASF;
+		};
+		03F6EAFC2B983AEA00189D09 /* AWSLambda */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03711F532B95B8B300E516BA /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSLambda;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

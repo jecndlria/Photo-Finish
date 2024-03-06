@@ -9,8 +9,11 @@ import SwiftUI
 import SwiftData
 import AWSCore
 
+
+
 @main
 struct LoginScreenApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     var body: some Scene {
         WindowGroup {
             EmailLogin()
