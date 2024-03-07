@@ -9,10 +9,13 @@ rds_host = password.rds_host
 name = password.pf_admin
 password = password.db_password
 db_name = password.db_name
-userpool_id = ""
+userpool_id = password.userpool
 
 def lambda_handler(event, context): # im assuming here that the new user's information will be passed in event
     client = boto3.client('cognito-idp')
+    if len(event['userName']) < 5:
+        raise Exception("Cannot register users with username less than the minimum length of 5")
+        return event
     try:
         response = client.admin_create_user(
             UserPoolId=userpool_id, 
