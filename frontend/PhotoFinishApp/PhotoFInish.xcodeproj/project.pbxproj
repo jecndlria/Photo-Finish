@@ -56,6 +56,7 @@
 		03711FB12B95B8B300E516BA /* AWSUserPoolsSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 03711FB02B95B8B300E516BA /* AWSUserPoolsSignIn */; };
 		03F6EAF32B9837BD00189D09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6EAF22B9837BD00189D09 /* AppDelegate.swift */; };
 		2107DE882B81CCA6004F1991 /* successfulLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107DE872B81CCA6004F1991 /* successfulLogin.swift */; };
+		2147DB4F2B998C3C008D1B6A /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2147DB4E2B998C3C008D1B6A /* CreateAccount.swift */; };
 		21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */; };
 		21A713B72B6C234A00DAF6AE /* LoginPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A713B62B6C234A00DAF6AE /* LoginPage2.swift */; };
 		21A713BB2B6C234E00DAF6AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A713BA2B6C234E00DAF6AE /* Assets.xcassets */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		03F6EAF22B9837BD00189D09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2107DE872B81CCA6004F1991 /* successfulLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = successfulLogin.swift; sourceTree = "<group>"; };
+		2147DB4E2B998C3C008D1B6A /* CreateAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAccount.swift; path = "../../../../../.Trash/Photo-Finish/frontend/PhotoFinishApp/PhotoFInish/CreateAccount.swift"; sourceTree = "<group>"; };
 		21A713B12B6C234A00DAF6AE /* PhotoFInish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFInish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFInishApp.swift; sourceTree = "<group>"; };
 		21A713B62B6C234A00DAF6AE /* LoginPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage2.swift; sourceTree = "<group>"; };
@@ -155,8 +157,9 @@
 		21A713B32B6C234A00DAF6AE /* PhotoFInish */ = {
 			isa = PBXGroup;
 			children = (
-				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
 				21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */,
+				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
+				2147DB4E2B998C3C008D1B6A /* CreateAccount.swift */,
 				21A713B62B6C234A00DAF6AE /* LoginPage2.swift */,
 				B13B1E2C2B8440BA00E15A61 /* CameraView.swift */,
 				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
@@ -310,6 +313,7 @@
 				03F6EAF32B9837BD00189D09 /* AppDelegate.swift in Sources */,
 				21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */,
 				21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */,
+				2147DB4F2B998C3C008D1B6A /* CreateAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
