@@ -1,5 +1,4 @@
 import pymysql
-import boto3
 import password
 
 rds_host = password.rds_host
@@ -8,16 +7,15 @@ password = password.db_password
 db_name = password.db_name
 userpool_id = password.userpool
 
-def lambda_handler(event, context): # input: username and password
-  client = boto3.client('cognito-idp')
-  user = event['username']
-  passw = event['password']
-  try:
-    response = client.admin_get_user(UserPoolId=userpool_id, Username=user)
-    
-  except Exception as e:
-    print(e)
-  return {
-    "status": 200,
-    "body": "Hello!",
-  }
+def lambda_handler(event, context):
+    try:
+        conn = pymysql.connect(host=rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
+        cur = conn.cursor()
+        sql = f"""
+        SELECT * FROM user_accounts
+        """
+        cur.execute(sql)
+        results = cur.fetchall()
+        return results
+    except (Exception, pymysql.DatabaseError) as error:
+        print(error)
