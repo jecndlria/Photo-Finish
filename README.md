@@ -74,6 +74,6 @@ Make sure the lambda function has this name, otherwise it will not run! We will 
 def lambda_handler(event, context):
   return {
     "status": 200,
-    "body": "Hello!",
+    "body": "Hello!"
   }
 ```

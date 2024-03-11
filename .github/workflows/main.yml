@@ -183,3 +183,135 @@ jobs:
           aws lambda update-function-code \
           --function-name login \
           --zip-file fileb://src/lambda/login/login.zip
+
+  update_lambda_delete_account:
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create delete_account zip file 
+        run: |
+          cd src/lambda/delete_account
+          zip -r delete_account.zip .
+      - name: Update delete_account function
+        run: |
+          aws lambda update-function-code \
+          --function-name delete_account \
+          --zip-file fileb://src/lambda/delete_account/delete_account.zip
+
+  update_lambda_delete_picture:
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create delete_picture zip file 
+        run: |
+          cd src/lambda/delete_picture
+          zip -r delete_picture.zip .
+      - name: Update delete_picture function
+        run: |
+          aws lambda update-function-code \
+          --function-name delete_picture \
+          --zip-file fileb://src/lambda/delete_picture/delete_picture.zip
+
+  update_lambda_get_account_info:
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create get_account_info zip file 
+        run: |
+          cd src/lambda/get_account_info
+          zip -r get_account_info.zip .
+      - name: Update get_account_info function
+        run: |
+          aws lambda update-function-code \
+          --function-name get_account_info \
+          --zip-file fileb://src/lambda/get_account_info/get_account_info.zip
+
+  update_lambda_get_feed:
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create get_feed zip file 
+        run: |
+          cd src/lambda/get_feed
+          zip -r get_feed.zip .
+      - name: Update get_feed function
+        run: |
+          aws lambda update-function-code \
+          --function-name get_feed \
+          --zip-file fileb://src/lambda/get_feed/get_feed.zip
+
+  update_lambda_logout:
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create logout zip file 
+        run: |
+          cd src/lambda/logout
+          zip -r logout.zip .
+      - name: Update logout function
+        run: |
+          aws lambda update-function-code \
+          --function-name logout \
+          --zip-file fileb://src/lambda/logout/logout.zip
+
+  update_lambda_upload_picture:
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create upload_picture zip file 
+        run: |
+          cd src/lambda/upload_picture
+          zip -r upload_picture.zip .
+      - name: Update upload_picture function
+        run: |
+          aws lambda update-function-code \
+          --function-name upload_picture \
+          --zip-file fileb://src/lambda/upload_picture/upload_picture.zip
