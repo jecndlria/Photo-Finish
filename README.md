@@ -56,7 +56,8 @@ In the Runtime Settings tab, change the handler to `(function_name).lambda_handl
         run: |
           aws lambda update-function-code \
           --function-name test1 \ # Change this line
-          --zip-file fileb://src/lambda/test1/test1.zip # Change this line
+          --zip-file fileb://src/lambda/test1/test1.zip \ # Change this line
+          --publish 
 ```
 
 ...substituting `test1` for the actual name of the Lambda function you create.
