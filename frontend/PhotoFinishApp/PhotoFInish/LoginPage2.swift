@@ -16,26 +16,28 @@ struct LoginPage2: View {
     //@State private var capturedImages: [UIImage] = []
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            FirstScreenView()
-                .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("Pictures")
-                }
-                .tag(0)
-            
-            SecondScreenView()
-                .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Camera")
-                }
-                .tag(1)
-            ThirdScreenView()
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Friends")
-                }
-                .tag(2)
+        NavigationView {
+            TabView(selection: $selectedTab) {
+                FirstScreenView()
+                    .tabItem {
+                        Image(systemName: "1.square.fill")
+                        Text("Pictures")
+                    }
+                    .tag(0)
+                
+                SecondScreenView()
+                    .tabItem {
+                        Image(systemName: "2.square.fill")
+                        Text("Camera")
+                    }
+                    .tag(1)
+                ThirdScreenView()
+                    .tabItem {
+                        Image(systemName: "3.square.fill")
+                        Text("Friends")
+                    }
+                    .tag(2)
+            }
         }
     }
 }
@@ -55,6 +57,7 @@ struct SecondScreenView: View {
 struct ThirdScreenView: View {
     var body: some View {
         YourThirdScreenView()
+        //FeedView()
     }
 }
 
@@ -72,7 +75,8 @@ struct YourThirdScreenView: View {
     var body: some View {
         // Your desired interface code for the second screen goes here
         VStack{
-            Text("Saved Pictures")
+            FeedView()
+            //Text("Saved Pictures")
         }
     }
             // Add your interface components here
