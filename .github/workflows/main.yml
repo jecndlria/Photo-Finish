@@ -49,7 +49,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name test \
-          --zip-file fileb://src/lambda/test/test.zip
+          --zip-file fileb://src/lambda/test/test.zip \
+          --publish
 
 
   update_lambda_getS3Object:
@@ -72,7 +73,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name getS3Object \
-          --zip-file fileb://src/lambda/getS3Object/getS3Object.zip
+          --zip-file fileb://src/lambda/getS3Object/getS3Object.zip \
+          --publish
 
   update_lambda_cognitotest:
     runs-on: ubuntu-latest
@@ -94,7 +96,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name cognitotest \
-          --zip-file fileb://src/lambda/cognitotest/cognitotest.zip
+          --zip-file fileb://src/lambda/cognitotest/cognitotest.zip \
+          --publish
 
   update_lambda_create_account:
     runs-on: ubuntu-latest
@@ -116,7 +119,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name create_account \
-          --zip-file fileb://src/lambda/create_account/create_account.zip
+          --zip-file fileb://src/lambda/create_account/create_account.zip \
+          --publish
 
   update_lambda_rekognition_image_analysis:
     runs-on: ubuntu-latest
@@ -138,7 +142,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name rekognition_image_analysis \
-          --zip-file fileb://src/lambda/rekognition_image_analysis/rekognition_image_analysis.zip
+          --zip-file fileb://src/lambda/rekognition_image_analysis/rekognition_image_analysis.zip \
+          --publish
 
   update_lambda_generate_prompt:
     runs-on: ubuntu-latest
@@ -160,7 +165,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name generate_prompt \
-          --zip-file fileb://src/lambda/generate_prompt/generate_prompt.zip
+          --zip-file fileb://src/lambda/generate_prompt/generate_prompt.zip \
+          --publish
 
   update_lambda_login:
     runs-on: ubuntu-latest
@@ -182,7 +188,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name login \
-          --zip-file fileb://src/lambda/login/login.zip
+          --zip-file fileb://src/lambda/login/login.zip \
+          --publish
 
   update_lambda_delete_account:
     runs-on: ubuntu-latest
@@ -204,7 +211,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name delete_account \
-          --zip-file fileb://src/lambda/delete_account/delete_account.zip
+          --zip-file fileb://src/lambda/delete_account/delete_account.zip \
+          --publish
 
   update_lambda_delete_picture:
     runs-on: ubuntu-latest
@@ -226,7 +234,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name delete_picture \
-          --zip-file fileb://src/lambda/delete_picture/delete_picture.zip
+          --zip-file fileb://src/lambda/delete_picture/delete_picture.zip \
+          --publish
 
   update_lambda_get_account_info:
     runs-on: ubuntu-latest
@@ -248,7 +257,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name get_account_info \
-          --zip-file fileb://src/lambda/get_account_info/get_account_info.zip
+          --zip-file fileb://src/lambda/get_account_info/get_account_info.zip \
+          --publish
 
   update_lambda_get_feed:
     runs-on: ubuntu-latest
@@ -270,7 +280,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name get_feed \
-          --zip-file fileb://src/lambda/get_feed/get_feed.zip
+          --zip-file fileb://src/lambda/get_feed/get_feed.zip \
+          --publish
 
   update_lambda_logout:
     runs-on: ubuntu-latest
@@ -292,7 +303,8 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name logout \
-          --zip-file fileb://src/lambda/logout/logout.zip
+          --zip-file fileb://src/lambda/logout/logout.zip \
+          --publish
 
   update_lambda_upload_picture:
     runs-on: ubuntu-latest
@@ -314,4 +326,5 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name upload_picture \
-          --zip-file fileb://src/lambda/upload_picture/upload_picture.zip
+          --zip-file fileb://src/lambda/upload_picture/upload_picture.zip \
+          --publish
