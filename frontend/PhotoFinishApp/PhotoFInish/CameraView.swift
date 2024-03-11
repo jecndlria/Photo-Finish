@@ -9,7 +9,16 @@ import AVFoundation
 import UIKit
 import SwiftUI
 
+protocol CameraViewDelegate: AnyObject {
+    func didFinishCapturingImage(_ image: UIImage)
+}
+
+
 class CameraView: UIViewController {
+    
+    //var delegate: CameraViewDelegate?
+    
+    var capturedImage: UIImage?
     
     var session: AVCaptureSession?
     
@@ -17,6 +26,7 @@ class CameraView: UIViewController {
     
     let previewLayer = AVCaptureVideoPreviewLayer() //video preview!!
     
+        
     private let shutter: UIButton = { //Size and color of Camera button
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         button.layer.cornerRadius = 50
@@ -25,11 +35,34 @@ class CameraView: UIViewController {
         return button
     } ()
     
+    //added button for saving pictures
+    private let saveButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Save", for: .normal)
+            button.backgroundColor = .blue
+            button.addTarget(self, action: #selector(savePhoto), for: .touchUpInside)
+            return button
+        }()
+    
+    //added button for restarting video session
+    private let restartButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Restart", for: .normal)
+            button.backgroundColor = .red
+            button.addTarget(self, action: #selector(restartCameraSession), for: .touchUpInside)
+        
+            return button
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = .black //making background black
+        view.backgroundColor = .black //making background black
         view.layer.addSublayer(previewLayer)
         view.addSubview(shutter)
+        view.addSubview(saveButton)
+        view.addSubview(restartButton)
+        //previewLayer.addSublayer(saveButton.layer)
+        //previewLayer.addSublayer(restartButton.layer)
         
         //connecting shutter button to actual function
         shutter.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
@@ -38,12 +71,36 @@ class CameraView: UIViewController {
         
     }
     
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewLayer.frame = view.bounds
         
         shutter.center = CGPoint(x: view.frame.size.width/2, y: view.frame.size.height - 100)
+        //let buttonSize = CGSize(width: 100, height: 50)
+        //saveButton.frame = CGRect(x: (view.frame.size.width - buttonSize.width) / 2, y: view.frame.size.height - 100, width: buttonSize.width, height: buttonSize.height)
+        //restartButton.frame = CGRect(x: view.frame.size.width - buttonSize.width - 20, y: view.frame.size.height - 100, width: buttonSize.width, height:buttonSize.height)
+        saveButton.frame = CGRect(x: 20, y: view.frame.size.height - 120, width: 100, height: 50)
+        restartButton.frame = CGRect(x: view.frame.size.width - 120, y: view.frame.size.height - 120, width: 100, height: 50)
+            
+    }
+    
+    
+    
+    @objc private func savePhoto() {
+            guard let image = capturedImage else {
+                return
+            }
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            print("Saved to phone successfully")
+    }
+    
+    
+    
+    @objc private func restartCameraSession() {
+            session?.startRunning()
+            // Remove the captured image view if it exists
+            //isPhotoTaken = false
+            view.subviews.compactMap { $0 as? UIImageView }.forEach { $0.removeFromSuperview() }
     }
     
     private func checkCameraPermissions() { //For checking just breaking if not authorized
@@ -67,7 +124,6 @@ class CameraView: UIViewController {
         @unknown default:
             break
         }
-        
     }
     
     private func setUpCamera() {
@@ -102,6 +158,8 @@ class CameraView: UIViewController {
     
     @objc private func didTapTakePhoto() { //omg actually taking the photo
         output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+        //isPhotoTaken = true
+        
     }
 }
 
@@ -115,8 +173,14 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
             return
         }
         let image = UIImage(data: data)
+        //capturedImage = UIImage(data: data)
         
-        session?.stopRunning()
+        //delegate?.didFinishCapturingImage(image!)
+        capturedImage = image
+        //delegate?.didFinishCapturingImage(image!)
+
+        
+        //session?.stopRunning()
         
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
@@ -129,4 +193,8 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
     }
         
 }
+
+
+
+
 

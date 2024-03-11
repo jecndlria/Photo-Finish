@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import AWSLambda
 
 struct EmailLogin: View {
     @State private var username = ""
@@ -42,8 +43,38 @@ struct EmailLogin: View {
                         .autocorrectionDisabled(true)
                         .autocapitalization(.none)
                     Button("Login"){
+                        
+                        
+                        
                         autheticateUser(username: username, password: password)
+                        /*
+                        let lambda = AWSLambda.default()
+                        let request = AWSLambdaInvocationRequest()
+                        request!.functionName = "test"
+                        request!.invocationType = .requestResponse // or .event if you don't need a response
+                        //request!.payload = "{\"key1\": \"value1\", \"key2\": \"value2\"}".data(using: .utf8)
+                        request!.payload = "Hello"
+                        lambda.invoke(request!) { (response, error) in
+                            if let error = error {
+                                print("Error invoking Lambda function: \(error)")
+                            } else if let payload = response?.payload as? [String: Any] {
+                                if let string2 = payload["string2"] as? String {
+                                    print(string2)
+                                }
+                                if let string1 = payload["string1"] as? String {
+                                    print(string1)
+                                }
+                                print("Lambda function response: \(payload)")
+                            }
+                        }
+                         */
+
+                        print("Application started up!")
                     }
+                    
+                    
+                    
+                    
                         .frame(width:200, height:40)
                         .background(Color.blue.opacity(0.2))
                         .foregroundColor(.white.opacity(0.6))
@@ -80,6 +111,6 @@ struct LoginPage_Previews:
     PreviewProvider{
     static var previews: some
         View{
-            EmailLogin()
+            LoginPage2()
         }
 }
