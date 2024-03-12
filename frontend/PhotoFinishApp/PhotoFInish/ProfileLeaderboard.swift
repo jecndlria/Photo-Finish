@@ -98,6 +98,8 @@ struct ProfileLeaderboard: View{
     private func addEntry() {
         let newEntry = FriendInfo(username: friendToAdd, totalPoints: pointsToAdd)
         entries.append(newEntry)
+        friendToAdd = ""
+        pointsToAdd = ""
         showingAddFriend = false
     }
 }
