@@ -1,34 +1,32 @@
 import boto3
 from botocore.exceptions import ClientError
 
-def get_following(user_id):
-    following = [] #query to retrieve all the userids that the user is following
+def get_following(username):
+    following = [] #query to retrieve all the usernames that the user is following
     return following
 
-def get_leaderboard_data(user_id):
-    leaderboard_data = [] #query to retrieve all user ids and with their associated points
+def get_leaderboard_data(username):
+    leaderboard_data = [] #query to retrieve all usernames and with their associated points
     return leaderboard_data
 
 def lambda_handler(event, context):
-    user_id = event.get("userId")
+    username = event.get("username")
 
     #make sure userid is valid
-    if not user_id:
+    if not username:
         return 
         {
             "statusCode": 400, 
-            "body": "Invalid input. Missing userId."
+            "body": "Invalid input. Missing username."
         }
 
     try:
         #get the list of users following
-        following = get_following(user_id)
+        following = get_following(username)
         #get the leaderboard data
-        leaderboard_data = get_leaderboard_data(user_id)
-        #filter the leaderboard based on the following list
-        filtered_leaderboard = [entry for entry in leaderboard_data if entry["userId"] in following_list]
+        leaderboard_data = get_leaderboard_data(username)
+        filtered_leaderboard = [] #query to filter the leaderboard based on the following list usernames
 
-        # Prepare response
         response = {
             "statusCode": 200,
             "body": 
