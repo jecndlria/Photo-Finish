@@ -3,11 +3,12 @@ import SwiftData
 import AWSLambda
 
 struct EmailLogin: View {
-    @State private var username = ""
+    @ObservedObject var usernameManager = UsernameManager.shared
     @State private var password = ""
     @State private var wrongUsername = 0
     @State private var wrongPassword = 0
     @State private var showingLoginScreen = false
+    @State private var showingSignUpScreen = false
     var body: some View{
         NavigationStack{
             ZStack{
@@ -22,7 +23,7 @@ struct EmailLogin: View {
                         .bold()
                         .font(.system(size: 25))
                         .multilineTextAlignment(.center)
-                    TextField("Username", text: $username)
+                    TextField("Username", text: $usernameManager.username)
                         .padding()
                         .frame(width:300, height:60)
                         .background(Color.white.opacity(0.08))
@@ -32,7 +33,7 @@ struct EmailLogin: View {
                         .border(.red, width:CGFloat(wrongUsername))
                         .autocorrectionDisabled(true)
                         .autocapitalization(.none)
-                    TextField("Password", text: $password)
+                    SecureField("Password", text: $password)
                         .padding()
                         .frame(width:300, height:60)
                         .background(Color.white.opacity(0.08))
@@ -43,33 +44,7 @@ struct EmailLogin: View {
                         .autocorrectionDisabled(true)
                         .autocapitalization(.none)
                     Button("Login"){
-                        
-                        
-                        
-                        autheticateUser(username: username, password: password)
-                        /*
-                        let lambda = AWSLambda.default()
-                        let request = AWSLambdaInvocationRequest()
-                        request!.functionName = "test"
-                        request!.invocationType = .requestResponse // or .event if you don't need a response
-                        //request!.payload = "{\"key1\": \"value1\", \"key2\": \"value2\"}".data(using: .utf8)
-                        request!.payload = "Hello"
-                        lambda.invoke(request!) { (response, error) in
-                            if let error = error {
-                                print("Error invoking Lambda function: \(error)")
-                            } else if let payload = response?.payload as? [String: Any] {
-                                if let string2 = payload["string2"] as? String {
-                                    print(string2)
-                                }
-                                if let string1 = payload["string1"] as? String {
-                                    print(string1)
-                                }
-                                print("Lambda function response: \(payload)")
-                            }
-                        }
-                         */
-
-                        print("Application started up!")
+                        autheticateUser(username: usernameManager.username, password: password)
                     }
                     
                     
@@ -78,6 +53,13 @@ struct EmailLogin: View {
                         .frame(width:200, height:40)
                         .background(Color.blue.opacity(0.2))
                         .foregroundColor(.white.opacity(0.6))
+                        .cornerRadius(10)
+                    Button("Create Account"){
+                        showingSignUpScreen = true
+                    }
+                        .frame(width:150, height:40)
+                        .background(Color.blue.opacity(0.1))
+                        .foregroundColor(.white.opacity(0.3))
                         .cornerRadius(10)
                     
 //                    NavigationLink(destination: Text("Welcome @\(username), ready to finish?"), isActive: $showingLoginScreen){
@@ -91,6 +73,12 @@ struct EmailLogin: View {
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
                 LoginPage2()
+                    .navigationBarHidden(true)
+            }
+            .navigationDestination(isPresented: $showingSignUpScreen){
+                //Text("Welcome \(username), ready to finish?")
+                //replace with some view/ next screen
+                CreateAccount()
                     .navigationBarHidden(true)
             }
         }

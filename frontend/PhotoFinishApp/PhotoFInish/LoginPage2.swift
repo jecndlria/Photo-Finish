@@ -14,7 +14,6 @@ import AVFoundation
 struct LoginPage2: View {
     @State private var selectedTab = 0
     //@State private var capturedImages: [UIImage] = []
-
     var body: some View {
         NavigationView {
             TabView(selection: $selectedTab) {
