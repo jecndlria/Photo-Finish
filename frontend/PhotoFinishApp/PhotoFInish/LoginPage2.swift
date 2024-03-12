@@ -63,7 +63,7 @@ struct ThirdScreenView: View {
 struct YourFirstScreenView: View {
     //@Binding var capturedImages: [UIImage]
     var body: some View {
-          Text("hello")
+          ProfileLeaderboard()
     }
 }
  
