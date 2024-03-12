@@ -5,6 +5,7 @@ import csv
 
 def lambda_handler(event, context):
     prompt = choose_object('Photo-Finish\src\lambda\AmazonRekognitionAllLabels_v3.0.csv')
+    #TODO: store prompt into the database
     print(f"Object of the day: {prompt}")
 
 def choose_object(csv_file_path):

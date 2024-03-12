@@ -4,8 +4,6 @@ import boto3
 from botocore.exceptions import ClientError
 import requests
 
-from generate_prompt import choose_object #cam i do thhis..
-
 def lambda_handler(event, context): #event parameter should be triggered by s3
     rekognition = boto3.client('rekognition')
     s3 = boto3.client('s3')
@@ -32,8 +30,8 @@ def lambda_handler(event, context): #event parameter should be triggered by s3
         #print("Labels:", labels_list)
         #print("Confidence Levels:", confidence_list)
 
-        #TODO: UM does this make sure that its the same object generated from the generate_prompt????? i am so bad at coding
-        prompt_object = choose_object('Photo-Finish\src\lambda\AmazonRekognitionAllLabels_v3.0.csv')
+        #TODO: retrieve the prompt object from the database
+        prompt_object = " "
         confidence_of_obj = None
 
         for label in response['Labels']:
@@ -53,6 +51,8 @@ def lambda_handler(event, context): #event parameter should be triggered by s3
                 Subject="Prompt Object Found"
             )
             break
+
+        #if confidence level above 50% then points awarded -> update database
 
     except ClientError:
         logger.info("Couldn't detect labels in %s.", self.object_key)

@@ -183,3 +183,25 @@ jobs:
           aws lambda update-function-code \
           --function-name login \
           --zip-file fileb://src/lambda/login/login.zip
+
+  update_lambda_get_leaderboard: 
+    runs-on: ubuntu-latest
+    needs: [checkout, configure_dep]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+      - name: Create get_leaderboard zip file 
+        run: |
+          cd src/lambda/get_leaderboard 
+          zip -r get_leaderboard.zip . 
+      - name: Update get_leaderboard function 
+        run: |
+          aws lambda update-function-code \
+          --function-name get_leaderboard \ 
+          --zip-file fileb://src/lambda/get_leaderboard/get_leaderboard.zip \ 
