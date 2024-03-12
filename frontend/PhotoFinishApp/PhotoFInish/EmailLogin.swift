@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct EmailLogin: View {
-    @State private var username = ""
+    @ObservedObject var usernameManager = UsernameManager.shared
     @State private var password = ""
     @State private var wrongUsername = 0
     @State private var wrongPassword = 0
@@ -22,7 +22,7 @@ struct EmailLogin: View {
                         .bold()
                         .font(.system(size: 25))
                         .multilineTextAlignment(.center)
-                    TextField("Username", text: $username)
+                    TextField("Username", text: $usernameManager.username)
                         .padding()
                         .frame(width:300, height:60)
                         .background(Color.white.opacity(0.08))
@@ -43,7 +43,7 @@ struct EmailLogin: View {
                         .autocorrectionDisabled(true)
                         .autocapitalization(.none)
                     Button("Login"){
-                        autheticateUser(username: username, password: password)
+                        autheticateUser(username: usernameManager.username, password: password)
                     }
                         .frame(width:200, height:40)
                         .background(Color.blue.opacity(0.2))
