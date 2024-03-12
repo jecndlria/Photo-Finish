@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import AWSLambda
 
 struct EmailLogin: View {
     @ObservedObject var usernameManager = UsernameManager.shared
@@ -45,6 +46,10 @@ struct EmailLogin: View {
                     Button("Login"){
                         autheticateUser(username: usernameManager.username, password: password)
                     }
+                    
+                    
+                    
+                    
                         .frame(width:200, height:40)
                         .background(Color.blue.opacity(0.2))
                         .foregroundColor(.white.opacity(0.6))
@@ -94,6 +99,6 @@ struct LoginPage_Previews:
     PreviewProvider{
     static var previews: some
         View{
-            EmailLogin()
+            LoginPage2()
         }
 }

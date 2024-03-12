@@ -66,6 +66,7 @@
 		21A713BE2B6C234E00DAF6AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A713BD2B6C234E00DAF6AE /* Preview Assets.xcassets */; };
 		21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */; };
 		21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D515E92B75C0D800E2D8FE /* EmailLogin.swift */; };
+		B10F31CF2B9F0EC400BDF58B /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F31CE2B9F0EC400BDF58B /* FeedView.swift */; };
 		B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13B1E2C2B8440BA00E15A61 /* CameraView.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		21A713BD2B6C234E00DAF6AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltLoginPage.swift; sourceTree = "<group>"; };
 		21D515E92B75C0D800E2D8FE /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
+		B10F31CE2B9F0EC400BDF58B /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		B13B1E2C2B8440BA00E15A61 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +174,7 @@
 				2147DB4E2B998C3C008D1B6A /* CreateAccount.swift */,
 				21A713B62B6C234A00DAF6AE /* LoginPage2.swift */,
 				B13B1E2C2B8440BA00E15A61 /* CameraView.swift */,
+				B10F31CE2B9F0EC400BDF58B /* FeedView.swift */,
 				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
 				2107DE872B81CCA6004F1991 /* successfulLogin.swift */,
 				03F6EAF22B9837BD00189D09 /* AppDelegate.swift */,
@@ -316,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B10F31CF2B9F0EC400BDF58B /* FeedView.swift in Sources */,
 				21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */,
 				2147DB552B9FCB49008D1B6A /* UsernameManager.swift in Sources */,
 				2147DB512B9F7EC0008D1B6A /* ProfileLeaderboard.swift in Sources */,
@@ -488,6 +492,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow to take photo";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow to record Audio";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -519,6 +524,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow to take photo";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow to record Audio";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
