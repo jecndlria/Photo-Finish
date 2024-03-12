@@ -30,21 +30,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         // Invoke Test Here
-        let lambda = AWSLambda.default()
-        let request = AWSLambdaInvocationRequest()
-        request!.functionName = "test"
-        request!.invocationType = .requestResponse // or .event if you don't need a response
-        
-        lambda.invoke(request!) { (response, error) in
-            if let error = error {
-                print("Error invoking Lambda function: \(error)")
-            } else if let payload = response?.payload {
-                // Handle the response payload here
-                print("Lambda function response: \(payload)")
-            }
-        }
-
-        print(credentialsProvider)
+//        let lambda = AWSLambda.default()
+//        let request = AWSLambdaInvocationRequest()
+//        request!.functionName = "test"
+//        request!.invocationType = .requestResponse // or .event if you don't need a response
+//        
+//        lambda.invoke(request!) { (response, error) in
+//            if let error = error {
+//                print("Error invoking Lambda function: \(error)")
+//            } else if let payload = response?.payload {
+//                // Handle the response payload here
+//                print("Lambda function response: \(payload)")
+//            }
+//        }
+//
+//        print(credentialsProvider)
         print("Application started up!")
     }
 }

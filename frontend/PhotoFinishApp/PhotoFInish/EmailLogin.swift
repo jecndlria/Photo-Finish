@@ -7,6 +7,7 @@ struct EmailLogin: View {
     @State private var wrongUsername = 0
     @State private var wrongPassword = 0
     @State private var showingLoginScreen = false
+    @State private var showingSignUpScreen = false
     var body: some View{
         NavigationStack{
             ZStack{
@@ -31,7 +32,7 @@ struct EmailLogin: View {
                         .border(.red, width:CGFloat(wrongUsername))
                         .autocorrectionDisabled(true)
                         .autocapitalization(.none)
-                    TextField("Password", text: $password)
+                    SecureField("Password", text: $password)
                         .padding()
                         .frame(width:300, height:60)
                         .background(Color.white.opacity(0.08))
@@ -48,6 +49,13 @@ struct EmailLogin: View {
                         .background(Color.blue.opacity(0.2))
                         .foregroundColor(.white.opacity(0.6))
                         .cornerRadius(10)
+                    Button("Create Account"){
+                        showingSignUpScreen = true
+                    }
+                        .frame(width:150, height:40)
+                        .background(Color.blue.opacity(0.1))
+                        .foregroundColor(.white.opacity(0.3))
+                        .cornerRadius(10)
                     
 //                    NavigationLink(destination: Text("Welcome @\(username), ready to finish?"), isActive: $showingLoginScreen){
 //                        EmptyView()
@@ -60,6 +68,12 @@ struct EmailLogin: View {
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
                 LoginPage2()
+                    .navigationBarHidden(true)
+            }
+            .navigationDestination(isPresented: $showingSignUpScreen){
+                //Text("Welcome \(username), ready to finish?")
+                //replace with some view/ next screen
+                CreateAccount()
                     .navigationBarHidden(true)
             }
         }
