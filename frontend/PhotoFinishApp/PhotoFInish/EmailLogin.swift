@@ -114,7 +114,7 @@ struct EmailLogin: View {
             .navigationDestination(isPresented: $showingLoginScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
-                LambdaTester()
+                LoginPage2()
                     //.navigationBarHidden(true)
             }
             .navigationDestination(isPresented: $showingSignUpScreen){
