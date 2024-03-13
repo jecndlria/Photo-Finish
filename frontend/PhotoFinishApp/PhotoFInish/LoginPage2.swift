@@ -25,13 +25,13 @@ struct LoginPage2: View {
                     }
                     .tag(0)
                 
-                SecondScreenView(capturedImage: $capturedImage)
+                SecondScreenView()
                     .tabItem {
                         Image(systemName: "2.square.fill")
                         Text("Camera")
                     }
                     .tag(1)
-                ThirdScreenView(capturedImage: $capturedImage)
+                ThirdScreenView()
                     .tabItem {
                         Image(systemName: "3.square.fill")
                         Text("Friends")
@@ -51,17 +51,15 @@ struct FirstScreenView: View {
 }
 
 struct SecondScreenView: View {
-    @Binding var capturedImage: UIImage?
 
     var body: some View {
-        YourSecondScreenView(capturedImage: $capturedImage) 
+        YourSecondScreenView()
     }
 }
 
 struct ThirdScreenView: View {
-    @Binding var capturedImage: UIImage?
     var body: some View {
-        YourThirdScreenView(capturedImage: $capturedImage)
+        YourThirdScreenView()
         //FeedView()
     }
 }
@@ -78,11 +76,11 @@ struct YourFirstScreenView: View {
 
 
 struct YourThirdScreenView: View {
-    @Binding var capturedImage: UIImage?
+    
     var body: some View {
         // Your desired interface code for the second screen goes here
         VStack{
-            FeedView(capturedImage: $capturedImage)
+            FeedView()
             //Text("Saved Pictures")
 
         }
@@ -93,10 +91,11 @@ struct YourThirdScreenView: View {
 
 
 struct YourSecondScreenView: View {
-    @Binding var capturedImage: UIImage? // Add binding for captured image
+   // Add binding for captured image
+
     var body: some View {
         VStack {
-            CameraViewController(capturedImage: $capturedImage)
+            CameraViewController()
         }
 
     }
@@ -109,12 +108,12 @@ struct ContentView_Previews: PreviewProvider { //content contained
 }
 
 struct CameraViewController: UIViewControllerRepresentable { //contained
-    @Binding var capturedImage: UIImage?
     func makeUIViewController(context: Context) -> CameraView {
         //return CameraView()
-        let cameraView = CameraView()
-        cameraView.capturedImage = capturedImage // Pass capturedImage to CameraView
-        return cameraView
+        //let cameraView = CameraView()
+        //capturedImage2 = capturedImage // Pass capturedImage to CameraView
+        
+        return CameraView()
     }
     
     func updateUIViewController(_ uiViewController: CameraView, context: Context) {

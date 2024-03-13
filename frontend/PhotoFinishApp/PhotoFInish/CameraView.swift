@@ -8,17 +8,17 @@
 import AVFoundation
 import UIKit
 import SwiftUI
-
+/*
 protocol CameraViewDelegate: AnyObject {
     func didFinishCapturingImage(_ image: UIImage)
 }
-
+ */
+//var capturedImage: UIImage?
 
 class CameraView: UIViewController {
     
     //var delegate: CameraViewDelegate?
     
-    var capturedImage: UIImage?
     
     var session: AVCaptureSession?
     
@@ -87,9 +87,7 @@ class CameraView: UIViewController {
     
     
     @objc func savePhoto() {
-            guard let image = capturedImage else {
-                return
-            }
+            
             print("Saved to phone successfully")
 
             //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -99,6 +97,7 @@ class CameraView: UIViewController {
             //}
             print("Saved to phone successfully")
     }
+     
     
     
     @objc func restartCameraSession() {
@@ -177,7 +176,7 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
         //capturedImage = UIImage(data: data)
         
         //delegate?.didFinishCapturingImage(image!)
-        capturedImage = image
+        //capturedImage = image
         //delegate?.didFinishCapturingImage(image!)
 
         

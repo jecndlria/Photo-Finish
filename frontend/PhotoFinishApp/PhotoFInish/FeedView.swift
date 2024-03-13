@@ -15,24 +15,10 @@ struct FeedView: View {
     
    
     
-    let places: [Place]
+    //let places: [Place]
         
-    @Binding var capturedImage: UIImage?
 
-    init(capturedImage: Binding<UIImage?>) {
-        self._capturedImage = capturedImage
-        self.places = [
-            Place(name: "Yuzu", image: "Barcelona", description: "On da Table"),
-            // Add more places as needed
-            Place(name: "Dune Bucket", image: "Paris", description: "Used"),
-            Place(name: "Airplane", image: "New York", description: "What he thinkin"),
-            Place(name: "Le", image: "Rome", description: "Bron"),
-            Place(name: "ji", image: "London", description: "Description for London"),
-            Place(name: "Dubai", image: "Dubai", description: "Description for Dubai"),
-        ]
-        
-    }
-    /*
+    
     let places: [Place] = [
         Place(name: "Yuzu", image: "Barcelona", description: "On da Table"),
         Place(name: "Dune Bucket", image: "Paris", description: "Used"),
@@ -42,7 +28,7 @@ struct FeedView: View {
         Place(name: "Dubai", image: "Dubai", description: "Description for Dubai"),
     ]
     
-    */
+    
     
     var body: some View {
         
@@ -106,7 +92,7 @@ struct FeedView: View {
     }
 }
 #Preview {
-    FeedView(capturedImage: .constant(nil))
+    FeedView()
 }
 struct Place: Hashable {
     let name: String
