@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import AWSCore
 import AWSLambda
 
 struct EmailLogin: View {
@@ -9,6 +10,47 @@ struct EmailLogin: View {
     @State private var wrongPassword = 0
     @State private var showingLoginScreen = false
     @State private var showingSignUpScreen = false
+    @State private var printedOutput = ""
+    struct RedirectedOutputStream: TextOutputStream {
+            var target: EmailLogin
+
+            mutating func write(_ string: String) {
+                target.printedOutput.append(string)
+            }
+        }
+    func loginUser(username: String, password: String){
+        let lambda = AWSLambda.default()
+        let request = AWSLambdaInvocationRequest()
+        request!.functionName = "login"
+        request!.invocationType = .requestResponse
+        request!.payload = "{\"username\": \"\(username)\", \"password\": \"\(password)\"}".data(using: .utf8)
+        lambda.invoke(request!) { (response, error) in
+                    if let error = error {
+                        print("Error invoking Lambda function: \(error)")
+                    } else if let payload = response?.payload {
+                        //as? Data, let payloadString = String(data: payload, encoding: .utf8)
+                        // Handle the response payload here
+                        print("Lambda function response: \(payload)")
+                        var outputStream = RedirectedOutputStream(target: self)
+                        print("Lambda function response: \(payload)", to: &outputStream)
+                        print("Captured output: \(printedOutput)")
+                        if printedOutput.contains("200") {
+                            printedOutput = ""
+                            showingLoginScreen = true
+                        }else if printedOutput.contains("300"){
+                            wrongPassword = 2
+                            printedOutput = ""
+                        }else if printedOutput.contains("400"){
+                            wrongUsername = 2
+                            printedOutput = ""
+                        }else{
+                            wrongPassword = 2
+                            wrongUsername = 2
+                            printedOutput = ""
+                        }
+                    }
+                }
+    }
     var body: some View{
         NavigationStack{
             ZStack{
@@ -85,11 +127,11 @@ struct EmailLogin: View {
     }
     
     func autheticateUser(username: String, password: String){
-            if username == "test1"{
+            if username != ""{
                 wrongUsername = 0;
-                if password == "test1"{
+                if password != ""{
                     wrongPassword = 0
-                    showingLoginScreen = true
+                    loginUser(username: username, password: password)
                 } else {wrongPassword = 2}
             }else{ wrongUsername = 2}
         }
