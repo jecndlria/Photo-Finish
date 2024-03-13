@@ -16,7 +16,7 @@ struct LoginScreenApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     var body: some Scene {
         WindowGroup {
-            EmailLogin()
+            LoginPage2()
         }
     }
 }

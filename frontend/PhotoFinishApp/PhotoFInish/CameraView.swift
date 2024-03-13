@@ -9,6 +9,8 @@ import AVFoundation
 import UIKit
 import SwiftUI
 
+var takenPic: UIImage!
+
 protocol CameraViewDelegate: AnyObject {
     func didFinishCapturingImage(_ image: UIImage)
 }
@@ -26,6 +28,7 @@ class CameraView: UIViewController {
     
     let previewLayer = AVCaptureVideoPreviewLayer() //video preview!!
     
+    private var currentCameraPosition: AVCaptureDevice.Position = .back
         
     private let shutter: UIButton = { //Size and color of Camera button
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -69,6 +72,10 @@ class CameraView: UIViewController {
         
         checkCameraPermissions()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap))
+                tapGesture.numberOfTapsRequired = 2
+                view.addGestureRecognizer(tapGesture)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -84,14 +91,32 @@ class CameraView: UIViewController {
             
     }
     
+    @objc private func didDoubleTap() {
+            // Toggle between front and back camera positions
+            currentCameraPosition = currentCameraPosition == .back ? .front : .back
+            
+            // Remove existing inputs and add new input for the toggled camera
+            if let session = session {
+                session.beginConfiguration()
+                for input in session.inputs {
+                    session.removeInput(input)
+                }
+                addCameraInput(position: currentCameraPosition)
+                session.commitConfiguration()
+            }
+        }
+    
     
     
     @objc private func savePhoto() {
             guard let image = capturedImage else {
                 return
             }
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             print("Saved to phone successfully")
+            takenPic = image
+            UIImageWriteToSavedPhotosAlbum(takenPic, nil, nil, nil)
+
     }
     
     
@@ -161,6 +186,20 @@ class CameraView: UIViewController {
         //isPhotoTaken = true
         
     }
+    private func addCameraInput(position: AVCaptureDevice.Position) {
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
+            print("Failed to get \(position) camera.")
+            return
+        }
+        do {
+            let input = try AVCaptureDeviceInput(device: device)
+            if session!.canAddInput(input) {
+                session!.addInput(input)
+            }
+        } catch {
+            print("Error setting device input: \(error)")
+        }
+    }
 }
 
 extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 HOURS BEFORE I REALIZED I SPELLED //EXTENTION WRONGG!!!!
@@ -178,7 +217,8 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
         //delegate?.didFinishCapturingImage(image!)
         capturedImage = image
         //delegate?.didFinishCapturingImage(image!)
-
+        
+        
         
         //session?.stopRunning()
         

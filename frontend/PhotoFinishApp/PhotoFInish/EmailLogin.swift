@@ -78,8 +78,8 @@ struct EmailLogin: View {
             .navigationDestination(isPresented: $showingSignUpScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
-                CreateAccount()
-                    .navigationBarHidden(true)
+                //CreateAccount()
+                   // .navigationBarHidden(true)
             }
         }
     }
