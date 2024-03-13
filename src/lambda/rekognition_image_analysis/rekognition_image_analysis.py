@@ -44,9 +44,9 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
                 confidence_of_obj = label['Confidence']
                 logger.info(f"Object of the day: {prompt_object}")
                 logger.info(f"Confidence of the object of the day: {confidence_of_obj}")
+                break
             else:
                 logger.info(f"Object not found in image")
-                break
         
         #if the object is found then it will publish an sns message 
         if confidence_of_obj is not None and confidence_of_obj > 0:
