@@ -114,8 +114,8 @@ struct EmailLogin: View {
             .navigationDestination(isPresented: $showingLoginScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
-                LoginPage2()
-                    .navigationBarHidden(true)
+                LambdaTester()
+                    //.navigationBarHidden(true)
             }
             .navigationDestination(isPresented: $showingSignUpScreen){
                 //Text("Welcome \(username), ready to finish?")
@@ -141,6 +141,10 @@ struct LoginPage_Previews:
     PreviewProvider{
     static var previews: some
         View{
-            LoginPage2()
+            EmailLogin()
+            //LambdaTester()
         }
 }
+
+
+

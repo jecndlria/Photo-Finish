@@ -68,6 +68,7 @@
 		21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D515E92B75C0D800E2D8FE /* EmailLogin.swift */; };
 		B10F31CF2B9F0EC400BDF58B /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F31CE2B9F0EC400BDF58B /* FeedView.swift */; };
 		B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13B1E2C2B8440BA00E15A61 /* CameraView.swift */; };
+		B1481E752BA16C1B0055B966 /* LambdaTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1481E742BA16C1B0055B966 /* LambdaTester.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		21D515E92B75C0D800E2D8FE /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 		B10F31CE2B9F0EC400BDF58B /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		B13B1E2C2B8440BA00E15A61 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		B1481E742BA16C1B0055B966 /* LambdaTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambdaTester.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
 				2107DE872B81CCA6004F1991 /* successfulLogin.swift */,
 				03F6EAF22B9837BD00189D09 /* AppDelegate.swift */,
+				B1481E742BA16C1B0055B966 /* LambdaTester.swift */,
 				21A713BA2B6C234E00DAF6AE /* Assets.xcassets */,
 				21A713BC2B6C234E00DAF6AE /* Preview Content */,
 			);
@@ -327,6 +330,7 @@
 				B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */,
 				2147DB592B9FE597008D1B6A /* CreateAccount.swift in Sources */,
 				03F6EAF32B9837BD00189D09 /* AppDelegate.swift in Sources */,
+				B1481E752BA16C1B0055B966 /* LambdaTester.swift in Sources */,
 				21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */,
 				21A713B52B6C234A00DAF6AE /* PhotoFInishApp.swift in Sources */,
 				2147DB532B9FC56E008D1B6A /* FriendInfo.swift in Sources */,
