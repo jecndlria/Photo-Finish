@@ -182,7 +182,6 @@ jobs:
           --zip-file fileb://src/lambda/generate_prompt/generate_prompt.zip \
           --publish
 
-
   update_lambda_login:
     runs-on: ubuntu-latest
     needs: [checkout, configure_dep]
