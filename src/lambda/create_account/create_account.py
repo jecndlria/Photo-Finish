@@ -6,17 +6,21 @@ import password # password file with all aws credentials
 
 REGION = 'us-west-1b'
 rds_host = password.rds_host
-name = password.pf_admin
-password = password.db_password
+name = password.db_username
+passw = password.db_password
 db_name = password.db_name
 userpool_id = password.userpool
 
 def lambda_handler(event, context): # im assuming here that the new user's information will be passed in event
+    print('function is starting up')
     client = boto3.client('cognito-idp')
-    if len(event['userName']) < 5:
+    print('created cognito client')
+    if len(event['username']) < 5:
         raise Exception("Cannot register users with username less than the minimum length of 5")
         return event
+    print('username is longer than 5!')
     try:
+        print('pls')
         response = client.admin_create_user(
             UserPoolId=userpool_id, 
             Username=event['username'],
@@ -32,25 +36,37 @@ def lambda_handler(event, context): # im assuming here that the new user's infor
             ],
             TemporaryPassword=event['password']
             )
+        print('created user!')
     except Exception as e:
         print(e)
+        print('Exception raised')
+        error_message = str(e)
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': error_message})
+        }
 
     user = response['User']['Attributes']
-    user_display_name = response["Username"]
+    user_display_name = response['User']["Username"]
     user_email = next((attr["Value"] for attr in user if attr["Name"] == "email"), None)
     user_cognito_id = next((attr["Value"] for attr in user if attr["Name"] == "sub"), None) # generated cognito id
+    created_passw = event['password']
+    print('trying to connect...')
     try:
-        conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
+        conn = pymysql.connect(host=rds_host, user=name, password=passw, database='photofinish', connect_timeout=5)
+        print('connection made!')
         cur = conn.cursor()
         sql = f"""
         INSERT INTO user_accounts (
             username,
             email,
-            cognito_userid
+            cognito_userid,
+            password
         ) VALUES(
             '{user_display_name}',
             '{user_email}',
-            '{user_cognito_id}'
+            '{user_cognito_id}',
+            '{created_passw}'
         )
         """
         print(sql)
@@ -59,6 +75,12 @@ def lambda_handler(event, context): # im assuming here that the new user's infor
 
     except (Exception, pymysql.DatabaseError) as error:
         print(error)
+        error_message = str(error)
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': error_message})
+        }
+
 
     finally:
         if conn is not None:
