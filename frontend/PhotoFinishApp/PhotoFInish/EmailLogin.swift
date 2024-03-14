@@ -87,6 +87,7 @@ struct EmailLogin: View {
                         .autocapitalization(.none)
                     Button("Login"){
                         autheticateUser(username: usernameManager.username, password: password)
+                        
                     }
                     
                     
@@ -114,14 +115,14 @@ struct EmailLogin: View {
             .navigationDestination(isPresented: $showingLoginScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
-                LambdaTester()
-                    //.navigationBarHidden(true)
+                LoginPage2()
+                    .navigationBarHidden(true)
             }
             .navigationDestination(isPresented: $showingSignUpScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
                 CreateAccount()
-                    .navigationBarHidden(true)
+                    //.navigationBarHidden(true)
             }
         }
     }

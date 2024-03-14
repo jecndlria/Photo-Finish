@@ -36,7 +36,6 @@ struct ProfileLeaderboard: View{
     @ObservedObject var friendInfoManager = FriendInfoManager.shared
     @State private var showingAddFriend = false
     @State private var friendToAdd = ""
-    @State private var pointsToAdd = ""
     @State private var wrongUsername = 0
     @State private var printedOutput = ""
     struct RedirectedOutputStream: TextOutputStream {
@@ -65,11 +64,10 @@ struct ProfileLeaderboard: View{
                         if printedOutput.contains("200") {
                             printedOutput = ""
                             
-                            friendInfoManager.entries.removeAll()
-                            getFriends(username: UsernameManager.shared.username)
+//                            friendInfoManager.entries.removeAll()
+//                            getFriends(username: UsernameManager.shared.username)
                             
                             friendToAdd = ""
-                            pointsToAdd = ""
                             showingAddFriend = false
                         }else{
                             wrongUsername = 2
@@ -98,11 +96,10 @@ struct ProfileLeaderboard: View{
                             printedOutput = ""
                             
                             
-                            friendInfoManager.entries.removeAll()
-                            getFriends(username: UsernameManager.shared.username)
+//                            friendInfoManager.entries.removeAll()
+//                            getFriends(username: UsernameManager.shared.username)
                             
                             friendToAdd = ""
-                            pointsToAdd = ""
                             showingAddFriend = false
                         }else{
                             wrongUsername = 2
@@ -176,6 +173,10 @@ struct ProfileLeaderboard: View{
                     .frame(width: 200, height: 200)
                     .background(Color.gray)
                     .clipShape(Circle())
+                    .onAppear{
+                        friendInfoManager.entries.removeAll()
+                        getFriends(username: UsernameManager.shared.username)
+                    }
                 Text("Welcome, \(UsernameManager.shared.username)")
                     .font(.title)
                     .foregroundColor(.white)
@@ -201,15 +202,6 @@ struct ProfileLeaderboard: View{
                     Text("Enter username of follow")
                         .foregroundColor(.white)
                     TextField("Username", text: $friendToAdd)
-                        .padding()
-                        .frame(width:300, height:60)
-                        .background(Color.white.opacity(0.08))
-                        .foregroundStyle(.red)
-                        .font(.subheadline)
-                        .cornerRadius(10)
-                        .autocorrectionDisabled(true)
-                        .autocapitalization(.none)
-                    TextField("Points", text: $pointsToAdd)
                         .padding()
                         .frame(width:300, height:60)
                         .background(Color.white.opacity(0.08))
