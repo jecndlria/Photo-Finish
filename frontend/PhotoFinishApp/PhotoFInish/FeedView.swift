@@ -4,14 +4,10 @@
 //
 //  Created by Samarth Srinivasa on 3/11/24.
 //
-
 import Foundation
 import SwiftUI
 import AWSLambda
 import AWSCore
-
-
-
 extension String {
     func toImage() -> UIImage! {
         if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters){
@@ -21,7 +17,6 @@ extension String {
     }
     
 }
-
 struct FeedView: View {
     
     @State var currentIndex = 0 // Start with the first image visible
@@ -32,11 +27,11 @@ struct FeedView: View {
     @State var printedOutput = ""
     struct RedirectedOutputStream: TextOutputStream {
                 var target: FeedView
-
                 mutating func write(_ string: String) {
                     target.printedOutput.append(string)
         }
     }
+    
     func lambdacalling() {
         
         let lambda = AWSLambda.default()
@@ -58,16 +53,20 @@ struct FeedView: View {
                 print("Lambda function response: \(payload)")
                 var outputStream = RedirectedOutputStream(target: self)
                 print("\(payload)", to: &outputStream)
-                //print("Captured output: \(self.printedOutput)")
+                
+                print("Captured output: \(self.printedOutput)")
+                
                 if printedOutput.contains("200") {
                     places.removeAll()
                     let components = printedOutput.split { $0 == "," || $0 == "\n" }
+                    //var pointsData: [String: String] = [:] //added
                     for component in components {
                         let keyValue = component.split(separator: "=")
                         print(keyValue)
                         guard keyValue.count == 2 else {
                             continue
                         }
+                        
                         let key = keyValue[0].trimmingCharacters(in: .whitespaces)
                         let value = keyValue[1].trimmingCharacters(in: .whitespaces)
                         
@@ -80,10 +79,26 @@ struct FeedView: View {
                         
                         
                         if cleanedKey != "statusCode" && cleanedKey != "body" && cleanedKey != "payload" {
-                            let newEntry = Place(name: cleanedKey, image: cleanedValue.toImage() ,description: cleanedValue)
-                            places.append(newEntry)
+                            //pointsData[cleanedKey] = cleanedValue
+                            if let score = Int(cleanedValue) {
+                                if let placeIndex = places.firstIndex(where: { $0.name == cleanedKey }) {
+                                    places[placeIndex].point = score
+                                } else {
+                                    let newEntry = Place(name: cleanedKey, image: cleanedValue.toImage(), description: "", point: score)
+                                    places.append(newEntry)
+                                }
+                            } else {
+                                let newEntry = Place(name: cleanedKey, image: cleanedValue.toImage() ,description: cleanedValue, point: 100)
+                                places.append(newEntry)
+                                
+                                
+                                
+                            }
                         }
                     }
+                    print("This is the array")
+                    print(places)
+    
                 }
             }
             
@@ -91,6 +106,8 @@ struct FeedView: View {
         
     }
     
+    
+   
     
     
     var body: some View {
@@ -122,7 +139,6 @@ struct FeedView: View {
                             } placeholder: {
                                 ProgressView()
                             }
-
                             
                             //Image(uiImage: places[index].image ?? UIImage())
                             //Image(places[index].image)//places[index].image)
@@ -158,8 +174,9 @@ struct FeedView: View {
                                 //.padding(.top, 50) // Center the image vertically
                             Text(places[index].name)
                                 .font(.body)
-                            //Text()
-                             //   .font(.body)
+                            
+                            Text("\(places[index].point) points!")
+                               .font(.body)
                            
                         }
                     }
@@ -183,14 +200,11 @@ struct FeedView: View {
                 }
             }
              */
-        places.append(Place(name: user, image: takenPic ?? UIImage(), description: urlpass))
-
+        places.append(Place(name: user, image: takenPic ?? UIImage(), description: urlpass, point: 100))
         }
     }
     
 }
-
-
 #Preview {
     FeedView()
 }
@@ -198,16 +212,20 @@ struct Place: Hashable {
     let name: String
     let image: UIImage?
     let description: String
+    var point: Int
     
-    init(name: String, image: UIImage?, description: String) {
+    init(name: String, image: UIImage?, description: String, point: Int) {
             self.name = name
             self.image = image
             self.description = description
+            self.point = point
+        
         }
-
-        init(name: String, imageString: String, description: String) {
+        init(name: String, imageString: String, description: String, point: Int) {
             self.name = name
             self.image = UIImage(named: "Rome")!
             self.description = description
+            self.point = point
         }
 }
+
