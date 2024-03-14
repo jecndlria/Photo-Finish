@@ -301,6 +301,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
+      - name: Substitute secrets in password.py
+        run: |
+          sed -i "s/rds_host = \"secret\"/rds_host = \"${{ secrets.RDS_HOST }}\"/g" src/lambda/get_feed/password.py
+          sed -i "s/db_username = \"secret\"/db_username = \"${{ secrets.DB_USERNAME }}\"/g" src/lambda/get_feed/password.py
+          sed -i "s/db_password = \"secret\"/db_password = \"${{ secrets.DB_PASSWORD }}\"/g" src/lambda/get_feed/password.py
+          sed -i "s/db_name = \"secret\"/db_name = \"${{ secrets.DB_NAME }}\"/g" src/lambda/get_feed/password.py
+          sed -i "s/userpool = \"secret\"/userpool = \"${{ secrets.USERPOOL }}\"/g" src/lambda/get_feed/password.py
       - name: Create get_feed zip file 
         run: |
           cd src/lambda/get_feed
