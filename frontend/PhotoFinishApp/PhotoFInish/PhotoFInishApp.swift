@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import AWSCore
 
-
+var user = "joshtet"
 
 @main
 struct LoginScreenApp: App {
