@@ -61,8 +61,11 @@ class CameraView: UIViewController {
     //added button for saving pictures
     private let saveButton: UIButton = {
             let button = UIButton()
+        
             button.setTitle("Save", for: .normal)
-            button.backgroundColor = .blue
+            button.layer.cornerRadius = 30
+            button.layer.borderWidth = 10
+            button.backgroundColor = .black
             button.addTarget(self, action: #selector(savePhoto), for: .touchUpInside)
             return button
         }()
@@ -70,8 +73,10 @@ class CameraView: UIViewController {
     //added button for restarting video session
     private let restartButton: UIButton = {
             let button = UIButton()
+            button.layer.cornerRadius = 30
+            button.layer.borderWidth = 10
             button.setTitle("Restart", for: .normal)
-            button.backgroundColor = .red
+            button.backgroundColor = .black
             button.addTarget(self, action: #selector(restartCameraSession), for: .touchUpInside)
         
             return button
@@ -348,10 +353,27 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
         imageView.frame = view.bounds
         view.addSubview(imageView)
         
+        let overlayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 50))
+            overlayLabel.center = view.center
+            overlayLabel.textAlignment = .center
+            overlayLabel.textColor = .white
+            overlayLabel.font = UIFont.systemFont(ofSize: 30)
+            overlayLabel.text = "Wait before clicking save!"
+            view.addSubview(overlayLabel)
+        
         view.bringSubviewToFront(saveButton)
         view.bringSubviewToFront(restartButton)
         view.bringSubviewToFront(shutter)
         
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        //        overlayLabel.removeFromSuperview()
+        //    }
+        UIView.animate(withDuration: 10.0, delay: 2.0, options: .curveEaseOut, animations: {
+                overlayLabel.alpha = 0.0
+            }, completion: { _ in
+                // Remove the overlay label after animation completion
+                overlayLabel.removeFromSuperview()
+            })
         
         
         
