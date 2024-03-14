@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import AWSCore
 import AWSLambda
 
 struct EmailLogin: View {
@@ -9,6 +10,47 @@ struct EmailLogin: View {
     @State private var wrongPassword = 0
     @State private var showingLoginScreen = false
     @State private var showingSignUpScreen = false
+    @State private var printedOutput = ""
+    struct RedirectedOutputStream: TextOutputStream {
+            var target: EmailLogin
+
+            mutating func write(_ string: String) {
+                target.printedOutput.append(string)
+            }
+        }
+    func loginUser(username: String, password: String){
+        let lambda = AWSLambda.default()
+        let request = AWSLambdaInvocationRequest()
+        request!.functionName = "login"
+        request!.invocationType = .requestResponse
+        request!.payload = "{\"username\": \"\(username)\", \"password\": \"\(password)\"}".data(using: .utf8)
+        lambda.invoke(request!) { (response, error) in
+                    if let error = error {
+                        print("Error invoking Lambda function: \(error)")
+                    } else if let payload = response?.payload {
+                        //as? Data, let payloadString = String(data: payload, encoding: .utf8)
+                        // Handle the response payload here
+                        print("Lambda function response: \(payload)")
+                        var outputStream = RedirectedOutputStream(target: self)
+                        print("Lambda function response: \(payload)", to: &outputStream)
+                        print("Captured output: \(printedOutput)")
+                        if printedOutput.contains("200") {
+                            printedOutput = ""
+                            showingLoginScreen = true
+                        }else if printedOutput.contains("300"){
+                            wrongPassword = 2
+                            printedOutput = ""
+                        }else if printedOutput.contains("400"){
+                            wrongUsername = 2
+                            printedOutput = ""
+                        }else{
+                            wrongPassword = 2
+                            wrongUsername = 2
+                            printedOutput = ""
+                        }
+                    }
+                }
+    }
     var body: some View{
         NavigationStack{
             ZStack{
@@ -26,7 +68,7 @@ struct EmailLogin: View {
                     TextField("Username", text: $usernameManager.username)
                         .padding()
                         .frame(width:300, height:60)
-                        .background(Color.white.opacity(0.08))
+                        .background(Color.white.opacity(0.1))
                         .foregroundStyle(.red)
                         .font(.subheadline)
                         .cornerRadius(10)
@@ -36,7 +78,7 @@ struct EmailLogin: View {
                     SecureField("Password", text: $password)
                         .padding()
                         .frame(width:300, height:60)
-                        .background(Color.white.opacity(0.08))
+                        .background(Color.white.opacity(0.1))
                         .foregroundStyle(.red)
                         .font(.subheadline)
                         .cornerRadius(10)
@@ -45,6 +87,7 @@ struct EmailLogin: View {
                         .autocapitalization(.none)
                     Button("Login"){
                         autheticateUser(username: usernameManager.username, password: password)
+                        
                     }
                     
                     
@@ -68,7 +111,7 @@ struct EmailLogin: View {
                     
                 }
             }
-            .navigationBarHidden(true)
+            //.navigationBarHidden(true)
             .navigationDestination(isPresented: $showingLoginScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
@@ -78,18 +121,19 @@ struct EmailLogin: View {
             .navigationDestination(isPresented: $showingSignUpScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
-                //CreateAccount()
-                   // .navigationBarHidden(true)
+                CreateAccount()
+                    //.navigationBarHidden(true)
+
             }
         }
     }
     
     func autheticateUser(username: String, password: String){
-            if username == "test1"{
+            if username != ""{
                 wrongUsername = 0;
-                if password == "test1"{
+                if password != ""{
                     wrongPassword = 0
-                    showingLoginScreen = true
+                    loginUser(username: username, password: password)
                 } else {wrongPassword = 2}
             }else{ wrongUsername = 2}
         }
@@ -99,6 +143,9 @@ struct LoginPage_Previews:
     PreviewProvider{
     static var previews: some
         View{
-            LoginPage2()
+            EmailLogin()
         }
 }
+
+
+
