@@ -3,6 +3,16 @@ from pprint import pprint
 import boto3
 from botocore.exceptions import ClientError
 from botocore.vendored import requests
+import pymysql
+import password
+import json
+from datetime import datetime
+
+rds_host = password.rds_host
+name = password.db_username
+dbpassw = password.db_password
+db_name = password.db_name
+userpool_id = password.userpool
 
 def lambda_handler(event, context): #event parameter should be triggered by s3 object creation
     logger = logging.getLogger()
@@ -17,6 +27,7 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
     confidence_list = []
     try:
         object_key = event["Name"]
+        username = event["Username"]
         logger.info("Calling rekognition.detect_labels function")
         response = rekognition.detect_labels(
     Image={
@@ -35,8 +46,9 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
         #print("Labels:", labels_list)
         #print("Confidence Levels:", confidence_list)
 
-        #TODO: retrieve the prompt object from the database
-        prompt_object = "Apple"
+        #retrieve the prompt object from the database
+        prompt_object = get_prompt()
+        print(prompt_object)
         confidence_of_obj = None
 
         for label in response['Labels']:
@@ -45,7 +57,7 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
                 logger.info(f"Object of the day: {prompt_object}")
                 logger.info(f"Confidence of the object of the day: {confidence_of_obj}")
                 break
-            else:
+            else: 
                 logger.info(f"Object not found in image")
         
         #if the object is found then it will publish an sns message 
@@ -58,8 +70,9 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
             )
         #if confidence level above a 50% threshold then points awarded -> update database
         if confidence_of_obj is not None and confidence_of_obj > 0:
-            points_for_photo += 3
+            points_for_photo += int(confidence_of_obj)
             #TODO:update database with points count
+            update_points(event['Username'], points_for_photo)
 
     except KeyError as e:
         logger.error(f"KeyError: {e}")
@@ -67,3 +80,54 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
         logger.error(f"Error detecting labels: {e}")
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}")
+        
+def get_prompt():
+    try:
+        conn = pymysql.connect(host=rds_host, user=name, passwd=dbpassw, db='photofinish', connect_timeout=15)
+        curr = conn.cursor()
+        sql = f"""SELECT prompt FROM daily_prompts
+            ORDER BY date DESC
+            LIMIT 1;
+            """
+        print(sql)
+        curr.execute(sql)
+        result = curr.fetchone()
+        print(result[0])
+    except (Exception, pymysql.DatabaseError) as error:
+        print(error)
+        print('There was an error.')
+        error_message = str(error)
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': error_message})
+        }
+    finally:
+        conn.close()
+    return result[0]
+
+def update_points(username, points_for_photo):
+    try:
+        conn = pymysql.connect(host=rds_host, user=name, passwd=dbpassw, db='photofinish', connect_timeout=15)
+        curr = conn.cursor()
+        sql = f"""SELECT pointscount FROM user_accounts WHERE username = '{username}'
+        """
+        curr.execute(sql)
+        points = curr.fetchone()[0]
+        print(points)
+        points_total = points + points_for_photo
+        sql2 = f"""UPDATE user_accounts SET pointscount = {points_total} WHERE username = '{username}'
+        """
+        curr.execute(sql2)
+        conn.commit()
+        print('Points have been updated!')
+    except (Exception, pymysql.DatabaseError) as error:
+        print(error)
+        print('There was an error.')
+        error_message = str(error)
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': error_message})
+        }
+    finally:
+        conn.close()
+    return 1
