@@ -145,6 +145,3 @@ struct LoginPage_Previews:
             EmailLogin()
         }
 }
-
-
-
