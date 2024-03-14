@@ -39,13 +39,6 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
         )
         logger.info("Rekognition.detect_labels function executed successfully")
 
-        #for label in response['Labels']:
-            #labels_list.append(label['Name'])
-            #confidence_list.append(label['Confidence'])
-
-        #print("Labels:", labels_list)
-        #print("Confidence Levels:", confidence_list)
-
         #retrieve the prompt object from the database
         prompt_object = get_prompt()
         print(prompt_object)
@@ -61,18 +54,35 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
                 logger.info(f"Object not found in image")
         
         #if the object is found then it will publish an sns message 
-        if confidence_of_obj is not None and confidence_of_obj > 0:
-            sns_topic_arn = 'arn:aws:sns:us-west-1:058264131615:prompt_check'
-            sns.publish(
-                TopicArn=sns_topic_arn,
-                Message=f"Detected label: {prompt_object}, Confidence level: {confidence_of_obj}",
-                Subject="Prompt Object Found"
-            )
+        if confidence_of_obj > 50:
+            try:
+                sns_topic_arn = 'arn:aws:sns:us-west-1:058264131615:prompt_check'
+                sns_response = sns.publish(
+                    TopicArn=sns_topic_arn,
+                    Message=f"Detected label: {prompt_object}, Confidence level: {confidence_of_obj}",
+                    Subject="Prompt Object Found"
+                )
+                if sns_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                    logger.info("Message published to SNS topic successfully.")
+                else:
+                    logger.error("Failed to publish message to SNS topic.")
+            except ClientError as e:
+                logger.error(f"Error publishing message to SNS topic: {e}")                  
         #if confidence level above a 50% threshold then points awarded -> update database
-        if confidence_of_obj is not None and confidence_of_obj > 0:
+        if confidence_of_obj > 50:
             points_for_photo += int(confidence_of_obj)
-            #TODO:update database with points count
             update_points(event['Username'], points_for_photo)
+            return 
+            {
+            'statusCode': 200,
+            'body': json.dumps('Points updated successfully!')
+            }
+
+        return 
+        {
+            'statusCode': 500,
+            'body': json.dumps('An unexpected error occurred!')
+        }       
 
     except KeyError as e:
         logger.error(f"KeyError: {e}")
