@@ -165,6 +165,7 @@ class CameraView: UIViewController {
         let transferUtility = AWSS3TransferUtility.default()
         let objectKey = "\(user)\(sanitizedUrlPass).png" 
         let imageData = image.jpegData(compressionQuality: 0.8)!
+        var points: Int = 0
 
         transferUtility.uploadData(
             imageData,
@@ -179,27 +180,50 @@ class CameraView: UIViewController {
                 print("Image uploaded successfully = \(objectKey)")
                 let lambda = AWSLambda.default()
                 let request = AWSLambdaInvocationRequest()
+                let lambdaAI = AWSLambda.default()
+                let requestAI = AWSLambdaInvocationRequest()
+                
                 request!.functionName = "uploadS3Object"
                 request!.invocationType = .requestResponse
-                request!.payload = """
+                
+                requestAI!.functionName = "rekognition_image_analysis"
+                requestAI!.invocationType = .requestResponse
+                requestAI!.payload = """
                 {
-                    \"username\": "\(user)",
-                    \"object_key\": "\(objectKey)"
+                    \"Username\": "\(user)",
+                    \"Name\": "\(objectKey)"
                 }
                 """
-                lambda.invoke(request!) { (response, error) in
-                                    if let error = error {
-                                        print("Error invoking Lambda function: \(error)")
-                                    } else if let payload = response?.payload {
-                                        //as? Data, let payloadString = String(data: payload, encoding: .utf8)
-                                        // Handle the response payload here
-                                        print("Lambda function response: \(payload)")
-                                        var outputStream = RedirectedOutputStream(target: self)
-                                        print("Lambda function response: \(payload)", to: &outputStream)
-                                        //print("Captured output: \(self.printedOutput)")
-                                        
-                                        //self.restartCameraSession()
-                        
+
+                lambdaAI.invoke(requestAI!) { (responseAI, errorAI) in
+                                    if let errorAI = errorAI {
+                                        print("Error invoking AI Lambda function: \(errorAI)")
+                                    } else if let payloadAI = responseAI?.payload {
+                                        print("AI Lambda function response: \(payloadAI)")
+                                        var outputStreamAI = RedirectedOutputStream(target: self)
+                                        print("AI Lambda function response: \(payloadAI)", to: &outputStreamAI)
+                                        if let payloadAI = payloadAI as? [String: Any] {
+                                            points = payloadAI["points"] as? Int ?? 0
+                                            print("Points assigned to \(points)")
+                                        }
+                                        request!.payload = """
+                                        {
+                                            \"username\": "\(user)",
+                                            \"object_key\": "\(objectKey)",
+                                            \"points\": \(points)
+                                        }
+                                        """
+                                        lambda.invoke(request!) { (response, error) in
+                                            if let error = error {
+                                                print("Error invoking Lambda function: \(error)")
+                                            } else if let payload = response?.payload {
+                                                print("Lambda function response: \(payload)")
+                                                var outputStream = RedirectedOutputStream(target: self)
+                                                print("Lambda function response: \(payload)", to: &outputStream)
+                                            }
+                                            
+                                        }
+
                                     }
                                 }
                             
