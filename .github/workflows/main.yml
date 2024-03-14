@@ -141,6 +141,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
+      - name: Substitute secrets in password.py
+        run: |
+          sed -i "s/rds_host = \"secret\"/rds_host = \"${{ secrets.RDS_HOST }}\"/g" src/lambda/rekognition_image_analysis/password.py
+          sed -i "s/db_username = \"secret\"/db_username = \"${{ secrets.DB_USERNAME }}\"/g" src/lambda/rekognition_image_analysis/password.py
+          sed -i "s/db_password = \"secret\"/db_password = \"${{ secrets.DB_PASSWORD }}\"/g" src/lambda/rekognition_image_analysis/password.py
+          sed -i "s/db_name = \"secret\"/db_name = \"${{ secrets.DB_NAME }}\"/g" src/lambda/rekognition_image_analysis/password.py
+          sed -i "s/userpool = \"secret\"/userpool = \"${{ secrets.USERPOOL }}\"/g" src/lambda/rekognition_image_analysis/password.py
+
       - name: Create rekognition_image_analysis zip file
         run: |
           cd src/lambda/rekognition_image_analysis
@@ -164,6 +172,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
+      - name: Substitute secrets in password.py
+        run: |
+          sed -i "s/rds_host = \"secret\"/rds_host = \"${{ secrets.RDS_HOST }}\"/g" src/lambda/generate_prompt/password.py
+          sed -i "s/db_username = \"secret\"/db_username = \"${{ secrets.DB_USERNAME }}\"/g" src/lambda/generate_prompt/password.py
+          sed -i "s/db_password = \"secret\"/db_password = \"${{ secrets.DB_PASSWORD }}\"/g" src/lambda/generate_prompt/password.py
+          sed -i "s/db_name = \"secret\"/db_name = \"${{ secrets.DB_NAME }}\"/g" src/lambda/generate_prompt/password.py
+          sed -i "s/userpool = \"secret\"/userpool = \"${{ secrets.USERPOOL }}\"/g" src/lambda/generate_prompt/password.py
       - name: Create generate_prompt zip file
         run: |
           cd src/lambda/generate_prompt
