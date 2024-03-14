@@ -8,17 +8,17 @@
 import AVFoundation
 import UIKit
 import SwiftUI
-
+/*
 protocol CameraViewDelegate: AnyObject {
     func didFinishCapturingImage(_ image: UIImage)
 }
-
+ */
+//var capturedImage: UIImage?
 
 class CameraView: UIViewController {
     
     //var delegate: CameraViewDelegate?
     
-    var capturedImage: UIImage?
     
     var session: AVCaptureSession?
     
@@ -27,7 +27,7 @@ class CameraView: UIViewController {
     let previewLayer = AVCaptureVideoPreviewLayer() //video preview!!
     
         
-    private let shutter: UIButton = { //Size and color of Camera button
+    let shutter: UIButton = { //Size and color of Camera button
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         button.layer.cornerRadius = 50
         button.layer.borderWidth = 10
@@ -36,7 +36,7 @@ class CameraView: UIViewController {
     } ()
     
     //added button for saving pictures
-    private let saveButton: UIButton = {
+    let saveButton: UIButton = {
             let button = UIButton()
             button.setTitle("Save", for: .normal)
             button.backgroundColor = .blue
@@ -45,7 +45,7 @@ class CameraView: UIViewController {
         }()
     
     //added button for restarting video session
-    private let restartButton: UIButton = {
+    let restartButton: UIButton = {
             let button = UIButton()
             button.setTitle("Restart", for: .normal)
             button.backgroundColor = .red
@@ -86,24 +86,28 @@ class CameraView: UIViewController {
     
     
     
-    @objc private func savePhoto() {
-            guard let image = capturedImage else {
-                return
-            }
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    @objc func savePhoto() {
+            
+            print("Saved to phone successfully")
+
+            //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            //print("Saved to phone successfully")
+            //if let loginPage2 = self.navigationController?.viewControllers.first(where: { $0 is LoginPage2 }) as? LoginPage2 {
+            //    loginPage2.capturedImage = image
+            //}
             print("Saved to phone successfully")
     }
+     
     
     
-    
-    @objc private func restartCameraSession() {
+    @objc func restartCameraSession() {
             session?.startRunning()
             // Remove the captured image view if it exists
             //isPhotoTaken = false
             view.subviews.compactMap { $0 as? UIImageView }.forEach { $0.removeFromSuperview() }
     }
     
-    private func checkCameraPermissions() { //For checking just breaking if not authorized
+    func checkCameraPermissions() { //For checking just breaking if not authorized
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             
         case .notDetermined:
@@ -126,7 +130,7 @@ class CameraView: UIViewController {
         }
     }
     
-    private func setUpCamera() {
+    func setUpCamera() {
         let session = AVCaptureSession()
         if let device = AVCaptureDevice.default(for: .video) {
             do {
@@ -146,8 +150,6 @@ class CameraView: UIViewController {
                 self.session = session
                 
                 
-                
-                
             }
             catch {
                 print(error) //error check
@@ -156,7 +158,7 @@ class CameraView: UIViewController {
         }
     }
     
-    @objc private func didTapTakePhoto() { //omg actually taking the photo
+    @objc  func didTapTakePhoto() { //omg actually taking the photo
         output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
         //isPhotoTaken = true
         
@@ -164,8 +166,6 @@ class CameraView: UIViewController {
 }
 
 extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 HOURS BEFORE I REALIZED I SPELLED //EXTENTION WRONGG!!!!
-
-    
     //giving photo back as a parameter
     
     func photoOutput(_ output:AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error:Error?) {
@@ -176,22 +176,24 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
         //capturedImage = UIImage(data: data)
         
         //delegate?.didFinishCapturingImage(image!)
-        capturedImage = image
+        //capturedImage = image
         //delegate?.didFinishCapturingImage(image!)
 
         
         //session?.stopRunning()
-        
+       
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
         imageView.frame = view.bounds
         view.addSubview(imageView)
         
         
-        
-        
     }
         
+}
+
+#Preview {
+    CameraView()
 }
 
 
