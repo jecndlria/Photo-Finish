@@ -68,7 +68,7 @@ struct EmailLogin: View {
                     TextField("Username", text: $usernameManager.username)
                         .padding()
                         .frame(width:300, height:60)
-                        .background(Color.white.opacity(0.08))
+                        .background(Color.white.opacity(0.1))
                         .foregroundStyle(.red)
                         .font(.subheadline)
                         .cornerRadius(10)
@@ -78,7 +78,7 @@ struct EmailLogin: View {
                     SecureField("Password", text: $password)
                         .padding()
                         .frame(width:300, height:60)
-                        .background(Color.white.opacity(0.08))
+                        .background(Color.white.opacity(0.1))
                         .foregroundStyle(.red)
                         .font(.subheadline)
                         .cornerRadius(10)
@@ -110,7 +110,7 @@ struct EmailLogin: View {
                     
                 }
             }
-            .navigationBarHidden(true)
+            //.navigationBarHidden(true)
             .navigationDestination(isPresented: $showingLoginScreen){
                 //Text("Welcome \(username), ready to finish?")
                 //replace with some view/ next screen
@@ -141,6 +141,6 @@ struct LoginPage_Previews:
     PreviewProvider{
     static var previews: some
         View{
-            LoginPage2()
+            EmailLogin()
         }
 }
