@@ -30,12 +30,12 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
         username = event["Username"]
         logger.info("Calling rekognition.detect_labels function")
         response = rekognition.detect_labels(
-    Image={
-        'S3Object': {
-            'Bucket': bucket_name,
-            'Name': object_key
-        }
-        }
+            Image={
+                'S3Object': {
+                    'Bucket': bucket_name,
+                    'Name': object_key
+                }
+            }
         )
         logger.info("Rekognition.detect_labels function executed successfully")
 
@@ -72,14 +72,13 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
         if confidence_of_obj > 50:
             points_for_photo += int(confidence_of_obj)
             update_points(event['Username'], points_for_photo)
-            return 
-            {
-            'statusCode': 200,
-            'body': json.dumps('Points updated successfully!')
+            return {
+                'statusCode': 200,
+                'body': json.dumps('Points updated successfully!'),
+                'points': points_for_photo
             }
 
-        return 
-        {
+        return {
             'statusCode': 500,
             'body': json.dumps('An unexpected error occurred!')
         }       
