@@ -1,51 +1,41 @@
-import boto3
-from botocore.exceptions import ClientError
+import pymysql
+import password
+import json
 
-def get_following(username):
-    following = [] #query to retrieve all the usernames that the user is following
-    return following
+rds_host = password.rds_host
+name = password.db_username
+dbpassw = password.db_password
+db_name = password.db_name
+userpool_id = password.userpool
 
-def get_leaderboard_data(username):
-    leaderboard_data = [] #query to retrieve all usernames and with their associated points
-    return leaderboard_data
-
-def lambda_handler(event, context):
-    username = event.get("username")
-
-    #make sure userid is valid
-    if not username:
-        return 
-        {
-            "statusCode": 400, 
-            "body": "Invalid input. Missing username."
-        }
-
+def lambda_handler(event,context):
+    username = event['username']
+    data = {}
     try:
-        #get the list of users following
-        following = get_following(username)
-        #get the leaderboard data
-        leaderboard_data = get_leaderboard_data(username)
-        filtered_leaderboard = [] #query to filter the leaderboard based on the following list usernames
-
-        response = {
-            "statusCode": 200,
-            "body": 
-            {
-                "leaderboard": filtered_leaderboard
-            }
+        conn = pymysql.connect(host=rds_host, user=name, passwd=dbpassw, db='photofinish', connect_timeout=15)
+        curr = conn.cursor()
+        sql = f"""SELECT ua.username, ua.pointscount
+                FROM user_accounts ua
+                JOIN friends f ON ua.username = f.friend
+                WHERE f.username = '{username}'
+                """
+        curr.execute(sql)
+        result = curr.fetchall()
+        for x in range(len(result)):
+            data[result[x][0]] = result[x][1]
+        print(data)
+    except (Exception, pymysql.DatabaseError) as error:
+        print(error)
+        print('There was an error.')
+        error_message = str(error)
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': error_message})
         }
-        return response
-
-    except ClientError as e:
-        return 
-        {
-            "statusCode": 500, 
-            "body": f"Database error: {str(e)}"
-        }
-
-    except Exception as e:
-        return 
-        {
-            "statusCode": 500, 
-            "body": f"Unexpected error: {str(e)}"
-        }
+    finally:
+        conn.close()
+    return {
+        'statusCode': 200,
+        'body': "Success",
+        'payload': data
+    }
