@@ -12,11 +12,12 @@ userpool_id = password.userpool
 def lambda_handler(event, context):
   username = event['username']
   data = {}
+  points_dict = {}
   try:
     conn = pymysql.connect(host=rds_host, user=name, passwd=dbpassw, db='photofinish', connect_timeout=15)
     curr = conn.cursor()
     sql = f"""
-      SELECT f.friend, dp.photourl
+      SELECT f.friend, dp.photourl, dp.score
       FROM daily_photos dp
       JOIN friends f ON dp.username = f.friend
       WHERE f.username = '{username}'
@@ -28,6 +29,7 @@ def lambda_handler(event, context):
       raise ValueError(f"No photos found for friends of the user {username}.")
     for x in range(len(result)):
       data[result[x][0]] = result[x][1]
+      points_dict[result[x][0]] = result[x][2] 
     print(data)
   except (Exception, pymysql.DatabaseError) as error:
     print(error)
@@ -42,5 +44,6 @@ def lambda_handler(event, context):
   return {
       'statusCode': 200,
       'body': "Success",
-      'payload': data
+      'payload': data,
+      'scores': points_dict
   }
