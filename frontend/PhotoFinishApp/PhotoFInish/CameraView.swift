@@ -334,8 +334,3 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
     }
         
 }
-
-
-
-
-
