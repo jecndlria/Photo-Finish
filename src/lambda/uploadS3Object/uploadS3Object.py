@@ -17,6 +17,7 @@ def lambda_handler(event, context):
     object_key = event['object_key']
     image_url = f'https://{bucket_name}.s3.amazonaws.com/{object_key}'
     username = event['username']
+    points_for_picture = event['points']
     
     #print(f"Object of the day: {prompt}")
     try:
@@ -39,11 +40,13 @@ def lambda_handler(event, context):
         INSERT INTO daily_photos (
             photourl,
             username,
-            prompt
+            prompt,
+            score
         ) VALUES(
             '{image_url}',
             '{username}',
-            '{prompt}'
+            '{prompt}',
+            {points_for_picture}
         )
         """
         print(sql)
