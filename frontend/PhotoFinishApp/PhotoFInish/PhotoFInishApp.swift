@@ -9,14 +9,14 @@ import SwiftUI
 import SwiftData
 import AWSCore
 
-var user = "joshtet"
+//var user = "joshtet"
 
 @main
 struct LoginScreenApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     var body: some Scene {
         WindowGroup {
-            LoginPage2()
+            EmailLogin()
         }
     }
 }

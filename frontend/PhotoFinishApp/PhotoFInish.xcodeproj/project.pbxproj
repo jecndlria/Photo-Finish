@@ -22,6 +22,9 @@
 		B10F31CF2B9F0EC400BDF58B /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F31CE2B9F0EC400BDF58B /* FeedView.swift */; };
 		B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13B1E2C2B8440BA00E15A61 /* CameraView.swift */; };
 		B1481E752BA16C1B0055B966 /* LambdaTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1481E742BA16C1B0055B966 /* LambdaTester.swift */; };
+		B15B562D2BA304FF00681CE0 /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = B15B562C2BA304FF00681CE0 /* AWSCore */; };
+		B15B562F2BA304FF00681CE0 /* AWSLambda in Frameworks */ = {isa = PBXBuildFile; productRef = B15B562E2BA304FF00681CE0 /* AWSLambda */; };
+		B15B56312BA304FF00681CE0 /* AWSS3 in Frameworks */ = {isa = PBXBuildFile; productRef = B15B56302BA304FF00681CE0 /* AWSS3 */; };
 		B193B7492BA2AFC500E8ADD5 /* PersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193B7482BA2AFC500E8ADD5 /* PersonalView.swift */; };
 		B193B74B2BA2BAF000E8ADD5 /* LambdaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193B74A2BA2BAF000E8ADD5 /* LambdaHelper.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B15B56312BA304FF00681CE0 /* AWSS3 in Frameworks */,
+				B15B562D2BA304FF00681CE0 /* AWSCore in Frameworks */,
+				B15B562F2BA304FF00681CE0 /* AWSLambda in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,11 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */,
-				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
 				2147DB582B9FE597008D1B6A /* CreateAccount.swift */,
-				2147DB522B9FC56E008D1B6A /* FriendInfo.swift */,
-				2147DB542B9FCB49008D1B6A /* UsernameManager.swift */,
-				2147DB502B9F7EC0008D1B6A /* ProfileLeaderboard.swift */,
 				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
 				21A713B62B6C234A00DAF6AE /* LoginPage2.swift */,
 				2147DB502B9F7EC0008D1B6A /* ProfileLeaderboard.swift */,
@@ -93,8 +95,6 @@
 				2147DB5A2BA264C2008D1B6A /* FriendInfoManager.swift */,
 				2147DB522B9FC56E008D1B6A /* FriendInfo.swift */,
 				B193B7482BA2AFC500E8ADD5 /* PersonalView.swift */,
-				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
-				2107DE872B81CCA6004F1991 /* successfulLogin.swift */,
 				03F6EAF22B9837BD00189D09 /* AppDelegate.swift */,
 				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
 				B1481E742BA16C1B0055B966 /* LambdaTester.swift */,
@@ -126,6 +126,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B15B562B2BA3046100681CE0 /* PBXTargetDependency */,
 				03F6EAFD2B983AEA00189D09 /* PBXTargetDependency */,
 				03F6EAF72B983ADE00189D09 /* PBXTargetDependency */,
 				03F6EAF92B983ADE00189D09 /* PBXTargetDependency */,
@@ -134,6 +135,9 @@
 			);
 			name = PhotoFInish;
 			packageProductDependencies = (
+				B15B562C2BA304FF00681CE0 /* AWSCore */,
+				B15B562E2BA304FF00681CE0 /* AWSLambda */,
+				B15B56302BA304FF00681CE0 /* AWSS3 */,
 			);
 			productName = PhotoFInish;
 			productReference = 21A713B12B6C234A00DAF6AE /* PhotoFInish.app */;
@@ -232,6 +236,10 @@
 		03F6EAFD2B983AEA00189D09 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 03F6EAFC2B983AEA00189D09 /* AWSLambda */;
+		};
+		B15B562B2BA3046100681CE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = B15B562A2BA3046100681CE0 /* AWSS3 */;
 		};
 /* End PBXTargetDependency section */
 
@@ -486,6 +494,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03711F532B95B8B300E516BA /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
 			productName = AWSLambda;
+		};
+		B15B562A2BA3046100681CE0 /* AWSS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1481E762BA190CE0055B966 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSS3;
+		};
+		B15B562C2BA304FF00681CE0 /* AWSCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1481E762BA190CE0055B966 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCore;
+		};
+		B15B562E2BA304FF00681CE0 /* AWSLambda */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1481E762BA190CE0055B966 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSLambda;
+		};
+		B15B56302BA304FF00681CE0 /* AWSS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1481E762BA190CE0055B966 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSS3;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

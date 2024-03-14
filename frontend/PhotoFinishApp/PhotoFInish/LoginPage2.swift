@@ -10,6 +10,9 @@ import SwiftData
 import UIKit
 import AVFoundation
 
+var user = UsernameManager.shared.username
+
+
 @MainActor
 struct LoginPage2: View {
     @State var selectedTab = 0
