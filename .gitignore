@@ -96,3 +96,5 @@ src/lambda/*/*.zip
 # Passwords
 # src/lambda/create_account/password.py
 # src/lambda/login/password.py
+
+__pycache__
