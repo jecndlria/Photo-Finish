@@ -86,9 +86,7 @@ struct FeedView: View {
                     }
                 }
             }
-            
         }
-        
     }
     
     
@@ -190,7 +188,6 @@ struct FeedView: View {
     
 }
 
-
 #Preview {
     FeedView()
 }
@@ -211,3 +208,5 @@ struct Place: Hashable {
             self.description = description
         }
 }
+
+

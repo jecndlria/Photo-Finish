@@ -23,7 +23,6 @@ protocol CameraViewDelegate: AnyObject {
     func didFinishCapturingImage(_ image: UIImage)
 }
 
-
 class CameraView: UIViewController {
     @State private var printedOutput = ""
     struct RedirectedOutputStream: TextOutputStream {
@@ -38,7 +37,6 @@ class CameraView: UIViewController {
 
     //var delegate: CameraViewDelegate?
     
-    var capturedImage: UIImage?
     
     var session: AVCaptureSession?
     
@@ -48,7 +46,7 @@ class CameraView: UIViewController {
     
     private var currentCameraPosition: AVCaptureDevice.Position = .back
         
-    private let shutter: UIButton = { //Size and color of Camera button
+    let shutter: UIButton = { //Size and color of Camera button
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         button.layer.cornerRadius = 50
         button.layer.borderWidth = 10
@@ -59,7 +57,7 @@ class CameraView: UIViewController {
     } ()
     
     //added button for saving pictures
-    private let saveButton: UIButton = {
+    let saveButton: UIButton = {
             let button = UIButton()
             button.setTitle("Save", for: .normal)
             button.backgroundColor = .blue
@@ -68,7 +66,7 @@ class CameraView: UIViewController {
         }()
     
     //added button for restarting video session
-    private let restartButton: UIButton = {
+    let restartButton: UIButton = {
             let button = UIButton()
             button.setTitle("Restart", for: .normal)
             button.backgroundColor = .red
@@ -155,6 +153,7 @@ class CameraView: UIViewController {
     
     
     
+
     @objc private func savePhoto() {
             guard let image = capturedImage else {
                 return
@@ -213,10 +212,10 @@ class CameraView: UIViewController {
             UIImageWriteToSavedPhotosAlbum(takenPic, nil, nil, nil)
 
     }
+     
     
     
-    
-    @objc private func restartCameraSession() {
+    @objc func restartCameraSession() {
             session?.startRunning()
             // Remove the captured image view if it exists
             //isPhotoTaken = false
@@ -224,7 +223,7 @@ class CameraView: UIViewController {
             view.subviews.compactMap { $0 as? UIImageView }.forEach { $0.removeFromSuperview() }
     }
     
-    private func checkCameraPermissions() { //For checking just breaking if not authorized
+    func checkCameraPermissions() { //For checking just breaking if not authorized
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             
         case .notDetermined:
@@ -247,7 +246,7 @@ class CameraView: UIViewController {
         }
     }
     
-    private func setUpCamera() {
+    func setUpCamera() {
         let session = AVCaptureSession()
         if let device = AVCaptureDevice.default(for: .video) {
             do {
@@ -267,8 +266,6 @@ class CameraView: UIViewController {
                 self.session = session
                 
                 
-                
-                
             }
             catch {
                 print(error) //error check
@@ -277,7 +274,7 @@ class CameraView: UIViewController {
         }
     }
     
-    @objc private func didTapTakePhoto() { //omg actually taking the photo
+    @objc  func didTapTakePhoto() { //omg actually taking the photo
         output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
         //isPhotoTaken = true
         //saveButton.isEnabled = false
@@ -300,8 +297,6 @@ class CameraView: UIViewController {
 }
 
 extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 HOURS BEFORE I REALIZED I SPELLED //EXTENTION WRONGG!!!!
-
-    
     //giving photo back as a parameter
     
     func photoOutput(_ output:AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error:Error?) {
@@ -312,13 +307,13 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
         //capturedImage = UIImage(data: data)
         
         //delegate?.didFinishCapturingImage(image!)
-        capturedImage = image
+        //capturedImage = image
         //delegate?.didFinishCapturingImage(image!)
         
         
         
         //session?.stopRunning()
-        
+       
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
         imageView.frame = view.bounds
@@ -329,10 +324,12 @@ extension CameraView: AVCapturePhotoCaptureDelegate { //I had this ERROR FOR 2 H
         view.bringSubviewToFront(shutter)
         
         
-        
-        
     }
         
+}
+
+#Preview {
+    CameraView()
 }
 
 
