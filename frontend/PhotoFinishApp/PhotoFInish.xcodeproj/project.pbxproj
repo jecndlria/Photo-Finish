@@ -21,7 +21,8 @@
 		21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D515E92B75C0D800E2D8FE /* EmailLogin.swift */; };
 		B10F31CF2B9F0EC400BDF58B /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10F31CE2B9F0EC400BDF58B /* FeedView.swift */; };
 		B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13B1E2C2B8440BA00E15A61 /* CameraView.swift */; };
-		B1481E752BA16C1B0055B966 /* LambdaTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1481E742BA16C1B0055B966 /* LambdaTester.swift */; };
+		B193B7492BA2AFC500E8ADD5 /* PersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193B7482BA2AFC500E8ADD5 /* PersonalView.swift */; };
+		B193B74B2BA2BAF000E8ADD5 /* LambdaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193B74A2BA2BAF000E8ADD5 /* LambdaHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +41,8 @@
 		21D515E92B75C0D800E2D8FE /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 		B10F31CE2B9F0EC400BDF58B /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		B13B1E2C2B8440BA00E15A61 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		B1481E742BA16C1B0055B966 /* LambdaTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambdaTester.swift; sourceTree = "<group>"; };
+		B193B7482BA2AFC500E8ADD5 /* PersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalView.swift; sourceTree = "<group>"; };
+		B193B74A2BA2BAF000E8ADD5 /* LambdaHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambdaHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,13 +78,21 @@
 				21A713B42B6C234A00DAF6AE /* PhotoFInishApp.swift */,
 				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
 				2147DB582B9FE597008D1B6A /* CreateAccount.swift */,
+				2147DB522B9FC56E008D1B6A /* FriendInfo.swift */,
+				2147DB542B9FCB49008D1B6A /* UsernameManager.swift */,
+				2147DB502B9F7EC0008D1B6A /* ProfileLeaderboard.swift */,
+				21D515E92B75C0D800E2D8FE /* EmailLogin.swift */,
 				21A713B62B6C234A00DAF6AE /* LoginPage2.swift */,
 				2147DB502B9F7EC0008D1B6A /* ProfileLeaderboard.swift */,
 				B13B1E2C2B8440BA00E15A61 /* CameraView.swift */,
+				B193B74A2BA2BAF000E8ADD5 /* LambdaHelper.swift */,
 				B10F31CE2B9F0EC400BDF58B /* FeedView.swift */,
 				2147DB542B9FCB49008D1B6A /* UsernameManager.swift */,
 				2147DB5A2BA264C2008D1B6A /* FriendInfoManager.swift */,
 				2147DB522B9FC56E008D1B6A /* FriendInfo.swift */,
+				B193B7482BA2AFC500E8ADD5 /* PersonalView.swift */,
+				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
+				2107DE872B81CCA6004F1991 /* successfulLogin.swift */,
 				03F6EAF22B9837BD00189D09 /* AppDelegate.swift */,
 				21B5D3D72B6E29A300F2F9F3 /* AltLoginPage.swift */,
 				B1481E742BA16C1B0055B966 /* LambdaTester.swift */,
@@ -180,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B193B7492BA2AFC500E8ADD5 /* PersonalView.swift in Sources */,
 				B10F31CF2B9F0EC400BDF58B /* FeedView.swift in Sources */,
 				2147DB5B2BA264C2008D1B6A /* FriendInfoManager.swift in Sources */,
 				21D515EA2B75C0D800E2D8FE /* EmailLogin.swift in Sources */,
@@ -188,6 +199,7 @@
 				21A713B72B6C234A00DAF6AE /* LoginPage2.swift in Sources */,
 				B13B1E2D2B8440BA00E15A61 /* CameraView.swift in Sources */,
 				2147DB592B9FE597008D1B6A /* CreateAccount.swift in Sources */,
+				B193B74B2BA2BAF000E8ADD5 /* LambdaHelper.swift in Sources */,
 				03F6EAF32B9837BD00189D09 /* AppDelegate.swift in Sources */,
 				B1481E752BA16C1B0055B966 /* LambdaTester.swift in Sources */,
 				21B5D3D82B6E29A300F2F9F3 /* AltLoginPage.swift in Sources */,

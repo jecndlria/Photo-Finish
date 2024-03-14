@@ -123,6 +123,7 @@ struct EmailLogin: View {
                 //replace with some view/ next screen
                 CreateAccount()
                     //.navigationBarHidden(true)
+
             }
         }
     }
