@@ -7,25 +7,20 @@ def lambda_handler(event, context):
 
     bucket_name = 'photo-finish-bucket'
     object_key = event['object_key']
+    image_url = f'https://{bucket_name}.s3.amazonaws.com/{object_key}'
 
     try:
         response = s3.get_object(Bucket=bucket_name, Key=object_key)
-        image_content = response['Body'].read()
-        encoded_image = base64.b64encode(image_content).decode('utf-8')
-
+        print("Object Exists")
         # Processing can be done here
 
         return {
             'statusCode' : 200,
-            'body': encoded_image,
-            'isBase64Encoded': True,
-            'headers': {
-                'Content-Type': 'image/png'
-            }
+            'image_url': image_url,
         }
     except Exception as e:
         print("Error:", e)
         return {
             'statusCode': 500,
-            'body': 'Error retrieving image from S3'
+            'body': str(e)
         }
