@@ -80,15 +80,31 @@ def lambda_handler(event, context): #event parameter should be triggered by s3 o
 
         return {
             'statusCode': 500,
-            'body': json.dumps('An unexpected error occurred!')
+            'body': json.dumps('An unexpected error occurred!'),
+            'points': 0
         }       
 
     except KeyError as e:
         logger.error(f"KeyError: {e}")
+        return {
+            'statusCode': 500,
+            'body': json.dumps('An unexpected error occurred!'),
+            'points': 0
+        } 
     except ClientError as e:
         logger.error(f"Error detecting labels: {e}")
+        return {
+            'statusCode': 500,
+            'body': json.dumps('An unexpected error occurred!'),
+            'points': 0
+        } 
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}")
+        return {
+            'statusCode': 500,
+            'body': json.dumps('An unexpected error occurred!'),
+            'points': 0
+        } 
         
 def get_prompt():
     try:
@@ -108,7 +124,8 @@ def get_prompt():
         error_message = str(error)
         return {
             'statusCode': 500,
-            'body': json.dumps({'error': error_message})
+            'body': json.dumps({'error': error_message}),
+            'points': 0
         }
     finally:
         conn.close()
@@ -135,7 +152,8 @@ def update_points(username, points_for_photo):
         error_message = str(error)
         return {
             'statusCode': 500,
-            'body': json.dumps({'error': error_message})
+            'body': json.dumps({'error': error_message}),
+            'points': 0
         }
     finally:
         conn.close()
