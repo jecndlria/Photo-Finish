@@ -1,3 +1,4 @@
+# generate_prompt
 The generate_prompt function doesn't take any input. 
 This function is triggered by an AWS CloudWatch event every 24 hours (midnight PST), which generates a prompt from all possbile Amazon Rekognition labels and pushes the result into the daily_prompts table in our database.
 Any input to this function is discarded, and is expected to output this:
