@@ -121,7 +121,7 @@ Output:
 
 ## Invalid input
 Input:
-Username is omitted (output is same for all other keys)
+Username is omitted (output is same for all other keys) This also exists for all other functions with input.
 ```json
 {
   "email": "asdf@gmail.com",
