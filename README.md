@@ -1,5 +1,7 @@
 # Photo Finish
 
+By Joshua Candaleria, Hallie Pham, Samarth Srinivasa, Angelika Bermudez, and Yuchen Zhu
+
 ## Docs for Development
 
 Drive Link: https://drive.google.com/drive/u/3/folders/1qi1kIUQad6aGMQsWT2ZEQTJ-bCvBfybs
