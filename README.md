@@ -13,14 +13,6 @@ Stuff you need (ask Josh):
 3. IAM public and secret access key (use AWS Swift APK)
 4. AWS_REGION is `us-west-1`
 
-## Using Swift SDK
-
-1. Create environment variables `AWS_REGION`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY`
-![image](https://github.com/jecndlria/Photo-Finish/assets/73074625/1b1f19d2-e34a-403c-adb7-3b4a2c4197d5)
-
-2. 
-
-
 ## Creating new Lambda function
 
 1. Create the new Lambda function on the AWS console
